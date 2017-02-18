@@ -5,7 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.pliesveld.discgolf.datalayer.PlayerRepository;
+import com.pliesveld.discgolf.repository.PlayerRepository;
 
 @SpringBootApplication
 public class DiscgolfApplication implements CommandLineRunner {

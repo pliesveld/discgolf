@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.pliesveld.discgolf.datalayer.CourseRepository;
+import com.pliesveld.discgolf.repository.CourseRepository;
 import com.pliesveld.discgolf.domain.Course;
 import com.pliesveld.discgolf.domain.Hole;
 import org.junit.Test;
