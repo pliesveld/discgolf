@@ -1,11 +1,10 @@
-package com.pliesveld.discgolf;
+package com.pliesveld.discgolf.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.pliesveld.discgolf.repository.PlayerRepository;
-import com.pliesveld.discgolf.repository.ScoreCardRepository;
+import com.pliesveld.discgolf.config.BaseMongoTest;
 import com.pliesveld.discgolf.domain.Hole;
 import com.pliesveld.discgolf.domain.Player;
 import com.pliesveld.discgolf.domain.Score;
@@ -19,7 +18,7 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
-public class ScoreCardRepoTest {
+public class ScoreCardRepoTest extends BaseMongoTest {
 
 	@Autowired
 	private PlayerRepository playerRepository;

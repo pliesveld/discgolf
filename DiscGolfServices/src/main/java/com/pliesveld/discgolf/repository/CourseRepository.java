@@ -7,6 +7,6 @@ import com.pliesveld.discgolf.domain.Course;
 import com.pliesveld.discgolf.domain.Player;
 
 @Repository
-public interface CourseRepository extends MongoRepository<Course, Long> {
-    public Player findByName(String name);
+public interface CourseRepository extends MongoRepository<Course, String> {
+    public Course findByName(String name);
 }

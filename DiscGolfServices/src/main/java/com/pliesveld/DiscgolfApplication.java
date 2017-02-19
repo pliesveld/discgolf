@@ -1,24 +1,23 @@
 package com.pliesveld;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.SpringBootConfiguration;
+import org.springframework.boot.autoconfigure.AutoConfigurationExcludeFilter;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
+import org.springframework.boot.context.TypeExcludeFilter;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
 
-import com.pliesveld.discgolf.repository.PlayerRepository;
-
-@SpringBootApplication
-public class DiscgolfApplication implements CommandLineRunner {
-
-	@Autowired
-	PlayerRepository playerRepository;
+@SpringBootConfiguration
+@EnableAutoConfiguration(exclude = {HibernateJpaAutoConfiguration.class, DataSourceAutoConfiguration.class})
+@ComponentScan(excludeFilters = {
+		@ComponentScan.Filter(type = FilterType.CUSTOM, classes = TypeExcludeFilter.class),
+		@ComponentScan.Filter(type = FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter.class) })
+public class DiscgolfApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DiscgolfApplication.class, args);
-	}
-
-	@Override
-	public void run(String... args) throws Exception {
-
 	}
 }
