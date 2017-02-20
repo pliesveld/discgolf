@@ -1,0 +1,22 @@
+
+
+def createImportTask(collection, filename) {
+	println 'Importing into ' + collection + ' from ' + filename
+
+	tasks.create(name:collection, type:Exec) {
+		description 'Import into mongodb the collection: ' + collection
+		workingDir './config'
+		commandLine = ['mongoimport',
+			'--host', 'localhost',
+			'--port', '27017',
+			'--db', 'discgolf',
+			'-c', collection,
+			'--drop',
+			'--file', filename]
+	}
+}
+
+task importMongoReferenceData {
+	createImportTask('player','players.json')	
+	createImportTask('course','courses.json')	
+}

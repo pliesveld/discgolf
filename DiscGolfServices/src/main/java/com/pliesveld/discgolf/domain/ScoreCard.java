@@ -6,6 +6,8 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.util.Assert;
 
+import com.pliesveld.discgolf.exception.GameException;
+
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,10 +55,17 @@ public class ScoreCard {
 
     public void record(int strokes) {
         final int currentHole = this.currentHole;
-        Assert.isTrue(currentHole >= 0 && currentHole <= 18);
-        final Hole hole = getCourse().getHoleList().get(currentHole);
-        getStrokesList().get(currentHole).setStrokes(strokes);
-        setCurrentHole(currentHole);
+        final List<Hole> holeList = getCourse().getHoleList();
+        final List<Score> scoreList = getStrokesList();
+
+        if ( (currentHole < 0 || currentHole > 17 )
+                || (holeList.size() <= currentHole )
+                || (scoreList.size() <= currentHole) ) {
+            throw new GameException("Could not record game; currentHole is invalid.");
+        }
+
+        scoreList.get(currentHole).setStrokes(strokes);
+        setCurrentHole(currentHole + 1);
     }
 
     public int computeScore() {

@@ -30,11 +30,29 @@ public class Game {
     @LastModifiedDate
     private Instant lastUpdated;
 
+    public Game() {
+    }
+
+    public Game(Course course, Player player) {
+        super();
+        this.setCourse(course);
+        this.getPlayers().add(player);
+    }
+
     public Game(Course course, List<Player> players) {
         super();
         this.setCourse(course);
         getPlayers().addAll(players);
+        createScoreCards();
     }
+
+    private void createScoreCards() {
+        for (Player player : getPlayers()) {
+            scores.putIfAbsent(player.getName(), new ScoreCard(this.getCourse()));
+        }
+    }
+
+    public String getId() { return id; }
 
     public GameStatus getGameStatus() { return gameStatus; }
 

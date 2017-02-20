@@ -1,0 +1,27 @@
+plugins {
+	id 'org.springframework.boot' version '1.5.1.RELEASE'
+}
+
+version '0.0.1'
+
+apply plugin: 'java'
+
+targetCompatibility = 1.8
+sourceCompatibility = 1.8
+
+logging.captureStandardOutput LogLevel.INFO
+
+repositories {
+    mavenCentral()
+}
+
+apply from: './config/mongoImport.gradle'
+
+test.dependsOn importMongoReferenceData
+
+dependencies {
+    testCompile('io.rest-assured:rest-assured:3.0.2')
+    testCompile project(':DiscGolfServices')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('io.rest-assured:spring-mock-mvc:3.0.2')
+}

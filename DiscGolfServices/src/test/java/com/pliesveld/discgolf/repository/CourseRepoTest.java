@@ -29,7 +29,10 @@ public class CourseRepoTest {
 	public void givenCourse_whenSave_thenCorrect() {
 		Course course = new Course();
 		List<Hole> holeList = Arrays.asList( newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole());
+		course.setName("Bull Run Regional Park");
 		course.setHoleList(holeList);
+		course.setLongitude("38.8016155");
+		course.setLatitude("-77.4779218");
 		Course savedCourse = courseRepository.save(course);
         assertNotNull(savedCourse);
         assertNotNull(savedCourse.getHoleList());

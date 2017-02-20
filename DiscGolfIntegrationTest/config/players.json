@@ -1,0 +1,1 @@
+{ "_id" : { "$oid" : "58a9c9b69225435df40b1baa" }, "_class" : "com.pliesveld.discgolf.domain.Player", "name" : "patrick" }
