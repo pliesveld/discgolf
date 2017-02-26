@@ -27,3 +27,7 @@ nbdist/
 out
 gradle
 gradlew
+
+
+# vim
+*.swp
