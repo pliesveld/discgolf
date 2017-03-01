@@ -66,15 +66,10 @@ public class GameRepoTest extends BaseMongoTest {
 	private Course newCourse() {
 		Course course = new Course();
 		course.setName("SampleGameCourse");
-		List<Hole> holeList = Arrays.asList(newHole(),  newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole());
-		course.setHoleList(holeList);
+		List<Basket> basketList = Arrays.asList(newBasket(),  newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket());
+		course.setBasketList(basketList);
 		return courseRepository.save(course);
 	}
 
-	private Hole newHole() {
-		Hole hole = new Hole();
-		hole.setPar(3);
-		hole.setDistance(250);
-        return hole;
-	}
+
 }

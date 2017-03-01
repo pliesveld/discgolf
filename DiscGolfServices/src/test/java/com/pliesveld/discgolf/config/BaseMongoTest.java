@@ -6,6 +6,8 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.pliesveld.discgolf.domain.Basket;
+import com.pliesveld.discgolf.domain.Color;
 import com.pliesveld.discgolf.test.MongoTestExecutionListener;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,4 +25,14 @@ public abstract class BaseMongoTest extends AbstractJUnit4SpringContextTests {
     @Configuration
     @Import(MongoConfig.class)
     public static class Confg {}
+
+
+	protected Basket.Pin easyPin() {
+		Basket.Pin pin = new Basket.Pin(Color.WHITE, Basket.PinLocation.A);
+		return pin;
+	}
+
+	protected Basket newBasket() {
+		return new Basket(easyPin());
+	}
 }

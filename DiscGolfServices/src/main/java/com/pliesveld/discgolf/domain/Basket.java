@@ -1,41 +1,69 @@
 package com.pliesveld.discgolf.domain;
 
-public class Hole {
-    private int par;
+import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
+import org.springframework.data.mongodb.core.index.GeoSpatialIndexType;
+import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
 
-    private int distance;
+public class Basket {
 
-    public Hole() {}
+    public enum PinLocation { A, B, C }
 
-    /**
-     * Instantiates a new Hole.
-     *
-     * @param par      the par, or average number of strokes expected
-     * @param distance the distance in yards to the basket
-     */
-    public Hole(int par, int distance) {
-        this.par = par;
-        this.distance = distance;
+    static public class Pin {
+        final private Color pinColor;
+        final private PinLocation pinLocation;
+
+        public Pin(final Color pinColor, final PinLocation pinLocation) {
+            this.pinColor = pinColor;
+            this.pinLocation = pinLocation;
+        }
+
+        public Color getPinColor() { return pinColor; }
+
+        public PinLocation getPinLocation() { return pinLocation; }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            Pin pin = (Pin) o;
+
+            if (getPinColor() != pin.getPinColor()) return false;
+            return getPinLocation() == pin.getPinLocation();
+        }
+
+        @Override
+        public int hashCode() {
+            int result = getPinColor() != null ? getPinColor().hashCode() : 0;
+            result = 31 * result + (getPinLocation() != null ? getPinLocation().hashCode() : 0);
+            return result;
+        }
     }
 
-    public Hole(Hole hole) {
-        this.par = hole.par;
-        this.distance = hole.distance;
+    final private Pin pin;
+
+    @GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_HAYSTACK)
+    private GeoJsonPoint location;
+
+    public Basket(final Pin pin) {this.pin = pin;}
+
+    public Pin getPin() { return pin; }
+
+    public GeoJsonPoint getLocation() { return location; }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Basket basket = (Basket) o;
+
+        return getPin() != null ? getPin().equals(basket.getPin()) : basket.getPin() == null;
     }
 
-    public int getPar() {
-        return par;
-    }
-
-    public void setPar(int par) {
-        this.par = par;
-    }
-
-    public int getDistance() {
-        return distance;
-    }
-
-    public void setDistance(int distance) {
-        this.distance = distance;
+    @Override
+    public int hashCode() {
+        return getPin() != null ? getPin().hashCode() : 0;
     }
 }
+

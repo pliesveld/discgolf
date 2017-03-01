@@ -1,6 +1,6 @@
 package com.pliesveld.discgolf.domain;
 
-public enum TeeType {
+public enum Color {
     RED,
     WHITE,
     BLUE

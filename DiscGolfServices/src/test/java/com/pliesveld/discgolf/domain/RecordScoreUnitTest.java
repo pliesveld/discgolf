@@ -30,26 +30,28 @@ public class RecordScoreUnitTest extends BaseMongoTest {
     public void givenCourse_shouldSave() throws Exception {
         Course course = new Course();
         course.setName("TestCourse");
-        course.getHoleList().addAll(Arrays.asList(
-                new Hole(3, 250),
-                new Hole(3, 250),
-                new Hole(3, 250),
-                new Hole(3, 250),
-                new Hole(3, 250),
-                new Hole(3, 250),
-                new Hole(3, 250),
-                new Hole(3, 250),
-                new Hole(3, 250),
-                new Hole(3, 250),
-                new Hole(3, 250),
-                new Hole(3, 250),
-                new Hole(3, 250),
-                new Hole(3, 250),
-                new Hole(3, 250),
-                new Hole(3, 250),
-                new Hole(3, 250),
-                new Hole(3, 250))
+        course.getBasketList().addAll(Arrays.asList(
+                newBasket(),
+                newBasket(),
+                newBasket(),
+                newBasket(),
+                newBasket(),
+                newBasket(),
+                newBasket(),
+                newBasket(),
+                newBasket(),
+                newBasket(),
+                newBasket(),
+                newBasket(),
+                newBasket(),
+                newBasket(),
+                newBasket(),
+                newBasket(),
+                newBasket(),
+                newBasket())
         );
         mongoTemplate.save(course);
     }
+
+
 }

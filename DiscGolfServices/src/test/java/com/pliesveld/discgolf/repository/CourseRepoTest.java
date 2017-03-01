@@ -4,8 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.pliesveld.discgolf.config.BaseMongoTest;
 import com.pliesveld.discgolf.domain.Course;
-import com.pliesveld.discgolf.domain.Hole;
+import com.pliesveld.discgolf.domain.Basket;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -17,7 +18,7 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
-public class CourseRepoTest {
+public class CourseRepoTest extends BaseMongoTest {
 
     @Autowired
 	private CourseRepository courseRepository;
@@ -28,37 +29,31 @@ public class CourseRepoTest {
 	@Test
 	public void givenCourse_whenSave_thenCorrect() {
 		Course course = new Course();
-		List<Hole> holeList = Arrays.asList( newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole());
+		List<Basket> basketList = Arrays.asList( newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket());
 		course.setName("Bull Run Regional Park");
-		course.setHoleList(holeList);
-		course.setLongitude("38.8016155");
-		course.setLatitude("-77.4779218");
+		course.setBasketList(basketList);
+//		course.setLongitude("38.8016155");
+//		course.setLatitude("-77.4779218");
 		Course savedCourse = courseRepository.save(course);
         assertNotNull(savedCourse);
-        assertNotNull(savedCourse.getHoleList());
-        assertEquals(18, savedCourse.getHoleList().size());
+        assertNotNull(savedCourse.getBasketList());
+        assertEquals(18, savedCourse.getBasketList().size());
 	}
 
 	@Test(expected = ConstraintViolationException.class)
 	public void givenInvalid19HoleCourse_whenSave_thenCorrect() {
 		Course course = new Course();
-		List<Hole> holeList = Arrays.asList( newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole());
-		course.setHoleList(holeList);
+		List<Basket> basketList = Arrays.asList( newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket());
+		course.setBasketList(basketList);
 		courseRepository.save(course);
 	}
 
     @Test(expected = ConstraintViolationException.class)
 	public void givenInvalid17HoleCourse_whenSave_thenCorrect() {
 		Course course = new Course();
-		List<Hole> holeList = Arrays.asList( newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole(), newHole());
-		course.setHoleList(holeList);
+		List<Basket> basketList = Arrays.asList( newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket());
+		course.setBasketList(basketList);
 		courseRepository.save(course);
 	}
-
-	private Hole newHole() {
-		Hole hole = new Hole();
-		hole.setPar(3);
-		hole.setDistance(250);
-        return hole;
-	}
 }
+

@@ -5,7 +5,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.pliesveld.discgolf.config.BaseMongoTest;
-import com.pliesveld.discgolf.domain.Hole;
+import com.pliesveld.discgolf.domain.Basket;
 import com.pliesveld.discgolf.domain.Player;
 import com.pliesveld.discgolf.domain.Score;
 import com.pliesveld.discgolf.domain.ScoreCard;
@@ -38,11 +38,9 @@ public class ScoreCardRepoTest extends BaseMongoTest {
 		playerRepository.save(newPlayer);
 
 		ScoreCard scoreCard = new ScoreCard();
-        Hole hole = new Hole();
-        hole.setDistance(250);
-        hole.setPar(3);
+		int basket = 3;
 
-        scoreCard.getStrokesList().addAll(Arrays.asList(new Score(hole,3),new Score(hole,3),new Score(hole,3),new Score(hole,3),new Score(hole,3),new Score(hole,3),new Score(hole,3),new Score(hole,3),new Score(hole,3),new Score(hole,3),new Score(hole,3),new Score(hole,3),new Score(hole,3),new Score(hole,3),new Score(hole,3),new Score(hole,3),new Score(hole,3),new Score(hole,3)));
+        scoreCard.getStrokesList().addAll(Arrays.asList(new Score(basket,3),new Score(basket,3),new Score(basket,3),new Score(basket,3),new Score(basket,3),new Score(basket,3),new Score(basket,3),new Score(basket,3),new Score(basket,3),new Score(basket,3),new Score(basket,3),new Score(basket,3),new Score(basket,3),new Score(basket,3),new Score(basket,3),new Score(basket,3),new Score(basket,3),new Score(basket,3)));
         ScoreCard savedScoreCard = scoreCardRepository.save(scoreCard);
 
         assertNotNull(savedScoreCard);
