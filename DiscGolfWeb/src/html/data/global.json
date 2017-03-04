@@ -1,3 +1,9 @@
 {
-  "title": "New Project"
+  "title": "DiscGolf Tracker",
+  "errorDialog": {
+  	"header": "Error",
+  	"title": "Operation Failed",
+  	"message": "Unknown Error"
+  },
+  "account": null
 }

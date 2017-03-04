@@ -1,0 +1,98 @@
+<article data-role="page" id="page-newgame">
+  <header data-role="header" data-position="fixed" class="ui-bar" data-add-back-btn="true">
+    <a href="#" data-rel="back" data-role="button">Back</a>
+    <h3>header</h3>
+  </header>
+
+  <script>
+    function onSelectCourse() {
+          $("#form-new-game-course").val("Bull Run Regional Park");
+      return false;
+    }
+
+    function onAddTempPlayer() {
+      var name = $('#add-temp-player').val();
+      if (name === '') {
+        return false;
+      }
+
+      // TODO: use templating
+      // http://stackoverflow.com/questions/2196036/jquery-the-right-way-to-add-a-child-element
+      var playerHTML = '<li>';
+      playerHTML += '<a href="#" class="player"></a>'
+      playerHTML += '<a href="#" data-icon="delete" onclick="$(this).parent().remove()" class="action">X</a>'
+      playerHTML += '</li>'
+      var $newPlayer = $(playerHTML);
+      $newPlayer.find('.player').text(name);
+      $newPlayer.appendTo('#new-game-players');
+      $('#new-game-players').listview('refresh');
+      $('#add-temp-player').val('');
+      return false;
+    }
+
+    function onStartGame() {
+      $('#errorDialog').popup('open');
+      return false;
+    }
+  </script>
+
+  <aside data-role="panel" id="panel-find-nearby">
+    <a href="#page-newgame" data-rel="close" data-role="button">Close panel</a>
+  </aside>
+
+  <aside data-role="panel" id="panel-search">
+    <a href="#page-newgame" data-rel="close" data-role="button">Close panel</a>
+  </aside>
+
+  <aside data-role="panel" id="panel-register-new" data-display="overlay">
+    <div class="ui-header"><h5>Register New Player</h5></div>
+    <p>Adds a player without registering an account.  The player will be associated with your account, and will not be able to be searched from the main directory.  Use to track a friend's score whom does not play regularly on their own.</p>
+
+    <form action="" onsubmit='return onAddTempPlayer();'>
+      <input type="text" placeholder="Player Name" id="add-temp-player">
+      <button type="submit" data-role="button" data-theme="c">Add Player</button>
+    </form>
+
+    <a href="#page-newgame" data-rel="close" data-role="button">Close panel</a>
+  </aside>
+
+  <aside data-role="panel" id="panel-select-course">
+    <div class="ui-header"><h3>Select Course</h3></div>
+    <form action="" onsubmit='return onSelectCourse();'>
+      <button type="submit" data-rel="close" data-role="button" data-theme="c">Bull Run Regional Park</button>
+    </form>
+    <a href="#page-newgame" data-rel="close" data-role="button" data-theme="d">Cancel</a>
+  </aside>
+
+  <ul data-role="listview" data-theme="b" id="new-game-players"">
+    <li data-role="list-divider">Players</li>
+  </ul>
+
+  <section data-role="main" class="ui-content">
+    <a href="#panel-find-nearby" data-role="button" class="ui-disabled">Find Nearby Players</a>
+    <a href="#panel-search" data-role="button" class="ui-disabled">Search for Players</a>
+    <a href="#panel-register-new" data-role="button">Register New Player</a>
+
+    <form action="" onsubmit="return onStartGame();">
+      <fieldset>
+        <input type="text" name="course" id="form-new-game-course" placeholder="Select Course"
+        onfocus='$("#panel-select-course").panel("open");'>
+      </fieldset>
+      <button type="submit" data-role="button" data-theme="c">Start Game</button>
+    </form>
+  </section>
+
+  <aside data-role="popup" id="errorDialog" data-overlay-theme="a" data-theme="a" data-dismissible="false" style="max-width:400px;">
+    <div data-role="header" data-theme="b">
+    <h1>{{errorDialog['header']}}</h1>
+    </div>
+    <div role="main" class="ui-content">
+        <h3 class="ui-title">{{errorDialog['title']}}</h3>
+        <p>{{errorDialog['message']}}</p>
+        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Ok</a>
+     </div>
+  </aside>
+
+  {% block footer %}
+  {% endblock %}
+</article>

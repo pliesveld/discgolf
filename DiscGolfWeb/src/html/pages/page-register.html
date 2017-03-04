@@ -1,0 +1,50 @@
+<article data-role="page" id="page-register">
+  <header data-role="header" data-position="fixed" class="ui-bar" data-add-back-btn="true">
+
+  {% block header %}
+    <h3>header</h3>
+    <a href="#" data-rel="back" class="ui-btn ui-btn-a ui-corner-all">Back</a>
+  {% endblock %}
+  </header>
+
+  <section data-role="main" class="ui-content">
+
+    <form id="form-register" data-role="form" action="" onsubmit="return false;">
+      <div data-role="fieldcontain" class="ui-hide-label">
+        <fieldset data-role="controlgroup">
+          <legend>Username:</legend>
+          <input type="text" name="username" placeholder="Username" id="register-username">
+          <label for="register-username" class="ui-hidden-accessible">Username:</label>
+        </fieldset>
+
+        <fieldset data-role="controlgroup">
+          <legend>Email:</legend>
+          <input type="email" name="email" placeholder="Email" id="register-email">
+          <label for="register-email" class="ui-hidden-accessible">Email:</label>
+        </fieldset>
+
+        <fieldset data-role="controlgroup">
+          <legend>Password:</legend>
+          <input type="password" name="password" placeholder="Password" id="register-password">
+          <label for="register-password" class="ui-hidden-accessible">Password:</label>
+        </fieldset>
+      </div>
+
+      <div data-role="fieldcontain" class="ui-hide-label">
+        <fieldset data-role="controlgroup">
+          <legend>Vouch for the player:</legend>
+          <input type="checkbox" name="vouch" id="register-vouch">
+          <label for="register-vouch">Vouch</label>
+        </fieldset>
+      </div>
+
+      <button type="submit">Register</button>
+    </form>
+  </section>
+
+  {% block footer %}
+  <footer data-role="footer" class="ui-bar" data-position="bottom">
+  <h5>Copyright 2017</h5>  
+  </footer>
+  {% endblock %}
+</article>

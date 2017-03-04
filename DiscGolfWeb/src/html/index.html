@@ -7,23 +7,8 @@
 {% extends 'layouts/application.html' %}
 
 {% block content %}
-<body>
-  <div data-role="page" id="page1">
-    <div data-role="header">
-      <h1>Page 1</h1>
-    </div>
-    <div role="main" class="ui-content">
-      <a href="#page2" data-transition="slide" class="ui-btn ui-corner-all ui-btn-inline">Go To Page 2</a>
-    </div>
-  </div>
-  <div data-role="page" id="page2">
-    <div data-role="header">
-      <h1>Page 2</h1>
-    </div>
-    <div role="main" class="ui-content">
-      <a href="#page1" data-rel="back" data-transition="slide" class="ui-btn ui-corner-all ui-btn-inline">Go Back To Page 1</a>
-    </div>
-  </div>
-</body>
-</html>
+    {% include "pages/page-index.html" %}
+    {% include "pages/page-login.html" %}
+    {% include "pages/page-register.html" %}
+    {% include "pages/page-newgame.html" %}
 {% endblock %}

@@ -1,0 +1,17 @@
+<article data-role="page" id="page-index">
+  <header data-role="header" data-position="fixed" class="ui-bar">
+  {% block header %}
+    <h3>header</h3>
+  {% endblock %}
+  </header>
+
+  <section data-role="main" class="ui-content">
+    <button>Login</button>
+  </section>
+
+  {% block footer %}
+  <footer data-role="footer" class="ui-bar">
+  <h5>Copyright 2017</h5>  
+  </footer>
+  {% endblock %}
+</article>

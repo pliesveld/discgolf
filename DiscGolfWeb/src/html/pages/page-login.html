@@ -1,0 +1,38 @@
+<article data-role="page" id="page-login">
+  <header data-role="header" data-position="fixed" class="ui-bar" data-add-back-btn="true">
+
+  {% block header %}
+    <h3>header</h3>
+    <a href="#" data-rel="back" class="ui-btn ui-btn-a ui-corner-all">Back</a>
+  {% endblock %}
+  </header>
+
+  <section data-role="main" class="ui-content">
+
+    <form action="" onsubmit="return false;">
+      <div data-role="fieldcontain" class="ui-hide-label">
+
+        <fieldset data-role="controlgroup">
+          <legend>Username:</legend>
+          <input type="text" name="username" placeholder="Username" id="username">
+          <label for="username">Username:</label>
+        </fieldset>
+
+        <fieldset data-role="controlgroup">
+          <legend>Password:</legend>
+          <input type="password" name="password" placeholder="Password" id="password">
+          <label for="username">Password:</label>
+        </fieldset>
+
+      </div>
+
+      <button type="submit">Login</button>
+    </form>
+  </section>
+
+  {% block footer %}
+  <footer data-role="footer" class="ui-bar" data-position="bottom">
+  <h5>Copyright 2017</h5>  
+  </footer>
+  {% endblock %}
+</article>

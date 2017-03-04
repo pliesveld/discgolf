@@ -1,0 +1,21 @@
+
+
+<article data-role="page" id="page-index">
+  <header data-role="header" data-position="fixed" class="ui-bar">
+  {% block header %}
+    <h3>header</h3>
+  {% endblock %}
+  </header>
+
+  <section data-role="main" class="ui-content">
+    <a href="#page-login" data-role="button">Login</a>
+    <a href="#page-register" data-role="button">Register</a>
+    <a href="#page-newgame" data-role="button">New Game</a>
+  </section>
+
+  {% block footer %}
+  <footer data-role="footer" class="ui-bar" data-position="bottom">
+  <h5>Copyright 2017</h5>  
+  </footer>
+  {% endblock %}
+</article>
