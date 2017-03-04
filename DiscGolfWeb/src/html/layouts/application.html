@@ -5,11 +5,11 @@
     <meta charset="utf-8">
     <title>{% block title %}{{ title }}{% endblock %}</title>
 
-    <link rel="stylesheet" href="stylesheets/discgolf.css" />
-    <link rel="stylesheet" href="stylesheets/jquery.mobile.icons.min.css" />
     <link rel="stylesheet" href="stylesheets/app.css">
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" /> 
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="themes/discgolf.min.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% include "shared/app-icons.html" %}
     {% block head %}{% endblock %}
@@ -21,5 +21,6 @@
       <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
       <script src="javascripts/app.js"></script>
     {% endblock %}
+  </body>
 
 </html>
