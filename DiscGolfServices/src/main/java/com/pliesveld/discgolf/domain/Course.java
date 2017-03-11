@@ -1,14 +1,14 @@
 package com.pliesveld.discgolf.domain;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.GeneratedValue;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Document
 public class Course {
@@ -21,25 +21,28 @@ public class Course {
     @Size(min = 4, max = 64)
     private String name;
 
-    private GeoJsonPoint location;
+    private Map<Integer,List<Basket>> availableBaskets = new LinkedHashMap<>();
 
-    @Size(min = 18, max = 18)
-    private List<Basket> basketList = new ArrayList<>();
-
-    @Size(min = 18, max = 18)
-    private List<Tee> teeList = new ArrayList<>();
+    private Map<Integer,List<Tee>> availableTees = new LinkedHashMap<>();
 
     public String getName() { return name; }
 
     public void setName(String name) { this.name = name; }
 
-    public List<Basket> getBasketList() {
-        return basketList;
+    public Map<Integer,List<Basket>> getAvailableBaskets() {
+        return availableBaskets;
     }
 
-    public void setBasketList(List<Basket> basketList) {
-        this.basketList = basketList;
+    public void setAvailableBaskets(Map<Integer,List<Basket>> availableBaskets) {
+        this.availableBaskets = availableBaskets;
     }
 
+    public Map<Integer,List<Tee>> getAvailableTees() {
+        return availableTees;
+    }
 
+    public void setAvailableTees(Map<Integer,List<Tee>> availableTees) {
+        this.availableTees = availableTees;
+    }
 }
+

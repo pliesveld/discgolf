@@ -36,7 +36,7 @@ public class MongoConfig extends AbstractMongoConfiguration {
     @Override
     protected String getDatabaseName() { return database; }
 
-   @Bean
+    @Bean
     public Module registerGeoJsonModule(){ return new GeoJsonModule(); }
 
     @Bean

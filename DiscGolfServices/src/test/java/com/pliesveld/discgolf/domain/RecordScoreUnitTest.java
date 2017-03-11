@@ -26,32 +26,5 @@ public class RecordScoreUnitTest extends BaseMongoTest {
         assertNotNull(mongoTemplate);
     }
 
-    @Test
-    public void givenCourse_shouldSave() throws Exception {
-        Course course = new Course();
-        course.setName("TestCourse");
-        course.getBasketList().addAll(Arrays.asList(
-                newBasket(),
-                newBasket(),
-                newBasket(),
-                newBasket(),
-                newBasket(),
-                newBasket(),
-                newBasket(),
-                newBasket(),
-                newBasket(),
-                newBasket(),
-                newBasket(),
-                newBasket(),
-                newBasket(),
-                newBasket(),
-                newBasket(),
-                newBasket(),
-                newBasket(),
-                newBasket())
-        );
-        mongoTemplate.save(course);
-    }
-
-
 }
+

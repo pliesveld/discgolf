@@ -1,4 +1,4 @@
-package com.pliesveld.discgolf.domain;
+package com.pliesveld.discgolf.domain.test;
 
 import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 

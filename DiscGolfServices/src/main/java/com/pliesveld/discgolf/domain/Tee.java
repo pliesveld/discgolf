@@ -1,21 +1,19 @@
 package com.pliesveld.discgolf.domain;
 
-import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import java.util.EnumSet;
 
 public class Tee {
 
-   private Color color;
+   @NotEmpty
+   private EnumSet<Color> color;
 
-   private GeoJsonPoint location;
-
-   public Tee(Color color, GeoJsonPoint location) {
-      this.color = color;
-      this.location = location;
+   public Tee(Color color) {
+      this.color = EnumSet.of(color);
    }
 
-   public Color getColor() { return color; }
-
-   public GeoJsonPoint getLocation() { return location; }
+   public EnumSet<Color> getColor() { return color; }
 
 }
 

@@ -29,11 +29,6 @@ public class ScoreCard {
 
     public ScoreCard() {}
 
-    public ScoreCard(Course course) {
-        super();
-        course.getBasketList().forEach(hole -> {getStrokesList().add(new Score(3,-1));});
-    }
-
     public List<Score> getStrokesList() { return strokesList; }
 
     public void setStrokesList(List<Score> strokesList) { this.strokesList = strokesList; }

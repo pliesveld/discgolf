@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.pliesveld.discgolf.domain.Game;
 import com.pliesveld.discgolf.domain.GameStatus;
+import com.pliesveld.discgolf.domain.Player;
 import com.pliesveld.discgolf.domain.ScoreCard;
 import com.pliesveld.discgolf.exception.GameException;
 import com.pliesveld.discgolf.repository.CourseRepository;
@@ -56,9 +57,16 @@ public class ScoreController {
                 throw new GameException("Invalid game state: " + gameStatus);
         }
 
-        final ScoreCard scoreCard = game.getScores().get(playerName);
+        final Player player = playerRepository.findByName(playerName);
+
+        if (player == null) {
+            throw new GameException("Player not found.");
+        }
+
+        final ScoreCard scoreCard = player.getScoreCard();
+
         if (scoreCard == null) {
-            throw new GameException("Player not in game.");
+            return ResponseEntity.notFound().build();
         }
 
         scoreCard.record(strokes);

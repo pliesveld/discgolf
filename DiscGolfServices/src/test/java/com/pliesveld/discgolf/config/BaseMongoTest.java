@@ -14,6 +14,8 @@ import org.apache.logging.log4j.Logger;
 import org.junit.Ignore;
 import org.junit.runner.RunWith;
 
+import java.util.EnumSet;
+
 import static org.springframework.test.context.TestExecutionListeners.MergeMode.MERGE_WITH_DEFAULTS;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -27,12 +29,9 @@ public abstract class BaseMongoTest extends AbstractJUnit4SpringContextTests {
     public static class Confg {}
 
 
-	protected Basket.Pin easyPin() {
-		Basket.Pin pin = new Basket.Pin(Color.WHITE, Basket.PinLocation.A);
-		return pin;
-	}
-
 	protected Basket newBasket() {
-		return new Basket(easyPin());
+		Basket basket = new Basket();
+		basket.setColors(EnumSet.of(Color.WHITE));
+		return basket;
 	}
 }
