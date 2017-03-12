@@ -1,6 +1,4 @@
-package com.pliesveld.discgolf.service;
-
-import org.springframework.context.ApplicationEvent;
+package com.pliesveld.discgolf.service.events;
 
 import com.pliesveld.discgolf.domain.Game;
 import com.pliesveld.discgolf.domain.ScoreCard;

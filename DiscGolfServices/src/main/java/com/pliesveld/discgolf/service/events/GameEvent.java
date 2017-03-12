@@ -1,4 +1,4 @@
-package com.pliesveld.discgolf.service;
+package com.pliesveld.discgolf.service.events;
 
 import com.pliesveld.discgolf.domain.Game;
 import org.apache.logging.log4j.LogManager;

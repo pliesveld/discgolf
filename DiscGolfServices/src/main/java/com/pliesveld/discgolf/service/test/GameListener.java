@@ -1,8 +1,9 @@
-package com.pliesveld.discgolf.service;
+package com.pliesveld.discgolf.service.test;
 
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
+import com.pliesveld.discgolf.service.events.GameEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

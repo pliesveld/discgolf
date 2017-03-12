@@ -1,23 +1,12 @@
 package com.pliesveld.discgolf.web.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PagedResourcesAssembler;
-import org.springframework.hateoas.PagedResources;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.pliesveld.discgolf.domain.*;
 import com.pliesveld.discgolf.exception.GameException;
-import com.pliesveld.discgolf.repository.CourseRepository;
-import com.pliesveld.discgolf.repository.GameRepository;
-import com.pliesveld.discgolf.repository.PlayerRepository;
-import com.pliesveld.discgolf.service.GameEvent;
-import com.pliesveld.discgolf.service.GameUpdateEvent;
+import com.pliesveld.discgolf.service.events.GameEvent;
+import com.pliesveld.discgolf.service.events.GameUpdateEvent;
 import com.pliesveld.discgolf.web.controller.base.AbstractDiscGolfController;
 
 import java.util.ArrayList;
