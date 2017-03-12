@@ -15,13 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pliesveld.discgolf.domain.Course;
 import com.pliesveld.discgolf.repository.CourseRepository;
+import com.pliesveld.discgolf.web.controller.base.AbstractDiscGolfController;
 
 @RestController
 @RequestMapping("/course")
-public class CourseController {
-
-    @Autowired
-    private CourseRepository courseRepository;
+public class CourseController extends AbstractDiscGolfController{
 
     @GetMapping(path = "/id/{id}")
     public ResponseEntity<Course> handleCourseById(@PathVariable("id") String courseId) {

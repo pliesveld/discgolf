@@ -15,13 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pliesveld.discgolf.domain.Player;
 import com.pliesveld.discgolf.repository.PlayerRepository;
+import com.pliesveld.discgolf.web.controller.base.AbstractDiscGolfController;
 
 @RestController
 @RequestMapping("/player")
-public class PlayerController {
-
-    @Autowired
-    private PlayerRepository playerRepository;
+public class PlayerController extends AbstractDiscGolfController {
 
     @GetMapping(path = "/id/{id}")
     public ResponseEntity<Player> handlePlayerById(@PathVariable("id") String playerId) {
@@ -47,4 +45,11 @@ public class PlayerController {
         final Page<Player> players = playerRepository.findAllByNameStartsWith(name, pageable);
         return new ResponseEntity<>(assembler.toResource(players), HttpStatus.OK);
     }
+
+    @GetMapping
+    public HttpEntity<PagedResources<Player>> handlePlayerList(Pageable pageable, PagedResourcesAssembler assembler) {
+        final Page<Player> players = playerRepository.findAll(pageable);
+        return new ResponseEntity<>(assembler.toResource(players), HttpStatus.OK);
+    }
+
 }
