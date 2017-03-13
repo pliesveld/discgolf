@@ -2,7 +2,9 @@ package com.pliesveld.discgolf.domain;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.util.Assert;
 
 import javax.persistence.GeneratedValue;
 
@@ -16,7 +18,8 @@ public class Player {
     @Indexed
     private String name;
 
-    private ScoreCard scoreCard;
+    @DBRef
+    private Game currentGame;
 
     public Player() {}
 
@@ -28,6 +31,16 @@ public class Player {
         this.name = name;
     }
 
-    public ScoreCard getScoreCard() { return scoreCard; }
+    public Game getCurrentGame() { return currentGame; }
+
+    public void setCurrentGame(Game currentGame) { this.currentGame = currentGame; }
+
+    public ScoreCard scoreCard() {
+        Assert.notNull(currentGame, "Player has no current game.");
+        Assert.notEmpty(currentGame.getPlayers(), "Current game has no players");
+        Assert.notEmpty(currentGame.getScores(), "Current game has no scorecards");
+        Assert.isTrue(currentGame.getScores().containsKey(name), "Player is not a member of the current game");
+        return currentGame.getScores().get(name);
+    }
 }
 

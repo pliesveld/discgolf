@@ -1,6 +1,5 @@
 package com.pliesveld.discgolf.web.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
@@ -14,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pliesveld.discgolf.domain.Player;
-import com.pliesveld.discgolf.repository.PlayerRepository;
 import com.pliesveld.discgolf.web.controller.base.AbstractDiscGolfController;
+
 
 @RestController
 @RequestMapping("/player")
@@ -29,6 +28,15 @@ public class PlayerController extends AbstractDiscGolfController {
         }
         return ResponseEntity.ok(player);
     }
+
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<Player> handlePlayerByIdMagically(@PathVariable("id") Player player) {
+        if (player == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(player);
+    }
+
 
     @GetMapping(path = "/name/{name}")
     public ResponseEntity<Player> handlePlayerByName(@PathVariable("name") String name){

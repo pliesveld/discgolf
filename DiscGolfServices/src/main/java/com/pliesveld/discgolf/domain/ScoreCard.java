@@ -1,31 +1,19 @@
 package com.pliesveld.discgolf.domain;
 
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.mongodb.core.mapping.Document;
-
 import com.pliesveld.discgolf.exception.GameException;
 
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
-@Document
 public class ScoreCard {
-
-    @Id
-    private String id;
 
     private List<Score> strokesList = new ArrayList<>();
 
     private int currentHole;
 
-    @CreatedDate
-    private Instant createdOn;
+    private Color tee;
 
-    @LastModifiedDate
-    private Instant lastUpdated;
+    private Color basket;
 
     public ScoreCard() {}
 
@@ -36,6 +24,14 @@ public class ScoreCard {
     public void setCurrentHole(int currentHole) { this.currentHole = currentHole; }
 
     public int getCurrentHole() { return currentHole; }
+
+    public Color getTee() { return tee; }
+
+    public void setTee(Color tee) { this.tee = tee; }
+
+    public Color getBasket() { return basket; }
+
+    public void setBasket(Color basket) { this.basket = basket; }
 
     public void record(int strokes) {
         final int currentHole = this.currentHole;

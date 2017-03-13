@@ -4,17 +4,16 @@ import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.NotNull;
 import java.util.EnumSet;
 
 public class Basket {
+    @NotNull
     private Character tag;
-
-    @NotEmpty
-    private EnumSet<Color> colors;
 
     private GeoJsonPoint location;
 
-    public Basket() {}
+    public Basket(Character tag) { this.tag = tag; }
 
     public Character getTag() { return tag; }
 
@@ -24,8 +23,19 @@ public class Basket {
 
     public void setLocation(GeoJsonPoint location) { this.location = location; }
 
-    public EnumSet<Color> getColors() { return colors; }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
-    public void setColors(EnumSet<Color> colors) { this.colors = colors; }
+        Basket basket = (Basket) o;
+
+        return getTag().equals(basket.getTag());
+    }
+
+    @Override
+    public int hashCode() {
+        return getTag().hashCode();
+    }
 }
 

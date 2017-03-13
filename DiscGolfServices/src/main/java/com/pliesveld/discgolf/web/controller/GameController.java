@@ -103,7 +103,7 @@ public class GameController extends AbstractDiscGolfController {
             throw new GameException("Player not found.");
         }
 
-        final ScoreCard scoreCard = player.getScoreCard();
+        final ScoreCard scoreCard = player.scoreCard();
 
         if (scoreCard == null) {
             return ResponseEntity.notFound().build();
