@@ -75,13 +75,13 @@ public class GameRepoTest extends BaseMongoTest {
             baskets.put(i, Collections.singletonList(basket));
         }
 
-        course.setAvailableBaskets(baskets);
+        course.setHoles(baskets);
         //		course.setLongitude("38.8016155");
         //		course.setLatitude("-77.4779218");
         Course savedCourse = courseRepository.save(course);
         assertNotNull(savedCourse);
-        assertNotNull(savedCourse.getAvailableBaskets());
-        assertEquals(18, savedCourse.getAvailableBaskets().size());
+        assertNotNull(savedCourse.getHoles());
+        assertEquals(18, savedCourse.getHoles().size());
 
 		return courseRepository.save(course);
 	}

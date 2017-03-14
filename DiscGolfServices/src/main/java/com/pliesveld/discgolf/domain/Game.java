@@ -7,6 +7,8 @@ import org.springframework.data.annotation.Reference;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.pliesveld.discgolf.exception.GameException;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.OneToMany;
 import java.time.Instant;
@@ -21,10 +23,13 @@ public class Game {
 
     private GameStatus gameStatus = GameStatus.NEW;
 
+    @DBRef
     private Course course;
 
-    @DBRef(db = "discgolf")
+    @DBRef
     private Collection<Player> players = new ArrayList<>();
+
+    private Map<String, ScoreCard> scores = new LinkedHashMap<>();
 
     @CreatedDate
     private Instant createdOn;
@@ -66,7 +71,19 @@ public class Game {
         this.players = players;
     }
 
+    public Map<String,ScoreCard> getScores() { return scores; }
+
+    public void setScores(Map<String,ScoreCard> scores) { this.scores = scores; }
+
     public Instant getCreatedOn() { return createdOn; }
 
     public Instant getLastUpdated() { return lastUpdated; }
+
+    public ScoreCard scoreCardOf(String playerName) {
+        ScoreCard card = scores.get(playerName);
+        if (card == null) {
+            throw new GameException(String.format("Could not find player %s in Game %s", playerName, getId()));
+        }
+        return card;
+    }
 }
