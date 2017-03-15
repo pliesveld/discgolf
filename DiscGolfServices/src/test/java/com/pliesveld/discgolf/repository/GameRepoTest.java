@@ -56,35 +56,7 @@ public class GameRepoTest extends BaseMongoTest {
 //	}
 
 
-	private Player newPlayer() {
-		Player player1 = new Player();
-		player1.setName("Player1");
-		return playerRepository.save(player1);
-	}
 
-	private Course newCourse() {
-		Course course = new Course();
-		course.setName("SampleGameCourse");
-
-        Basket basket = new Basket();
-        basket.setColors(EnumSet.of(Color.WHITE));
-        basket.setTag('A');
-
-        Map<Integer, List<Basket>> baskets = new LinkedHashMap<>();
-        for(int i = 1 ; i <= 18; i++) {
-            baskets.put(i, Collections.singletonList(basket));
-        }
-
-        course.setHoles(baskets);
-        //		course.setLongitude("38.8016155");
-        //		course.setLatitude("-77.4779218");
-        Course savedCourse = courseRepository.save(course);
-        assertNotNull(savedCourse);
-        assertNotNull(savedCourse.getHoles());
-        assertEquals(18, savedCourse.getHoles().size());
-
-		return courseRepository.save(course);
-	}
 
 
 }

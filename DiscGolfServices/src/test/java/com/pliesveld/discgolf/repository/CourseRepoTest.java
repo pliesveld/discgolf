@@ -27,22 +27,11 @@ public class CourseRepoTest extends BaseMongoTest {
 
 	@Test
 	public void givenCourse_whenSave_thenCorrect() {
-		Course course = new Course();
-		List<Basket> basketList = Arrays.asList( newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket(), newBasket());
+		Course course = newCourse();
 		course.setName("Bull Run Regional Park");
 
-		Basket basket = new Basket();
-		basket.setColors(EnumSet.of(Color.WHITE));
 
-        Map<Integer, List<Basket>> baskets = new LinkedHashMap<>();
-        for(int i = 1 ; i <= 18; i++) {
-            baskets.put(i, Collections.singletonList(basket));
-        }
-
-        course.setHoles(baskets);
-//		course.setLongitude("38.8016155");
-//		course.setLatitude("-77.4779218");
-		Course savedCourse = courseRepository.save(course);
+        Course savedCourse = courseRepository.save(course);
         assertNotNull(savedCourse);
         assertNotNull(savedCourse.getHoles());
         assertEquals(18, savedCourse.getHoles().size());

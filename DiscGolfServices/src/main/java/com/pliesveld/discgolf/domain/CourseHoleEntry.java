@@ -9,7 +9,7 @@ import java.util.*;
 
 public class CourseHoleEntry {
 
-    static public class HoleInfo {
+   static public class HoleInfo {
         private int par;
         private int distance;
 
@@ -74,4 +74,13 @@ public class CourseHoleEntry {
     private Map<TeeBasket, HoleInfo> info = new LinkedHashMap<>();
 
     private GeoJsonPolygon bounds;
+
+    public void addHole(Tee tee, Basket basket, HoleInfo holeInfo) {
+        baskets.add(basket);
+        tees.add(tee);
+        TeeBasket teeBasket = new TeeBasket(tee,basket);
+        info.put(teeBasket, holeInfo);
+    }
+
+
 }
