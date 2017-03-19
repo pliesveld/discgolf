@@ -9,7 +9,9 @@ import com.pliesveld.discgolf.service.events.GameEvent;
 import com.pliesveld.discgolf.service.events.GameUpdateEvent;
 import com.pliesveld.discgolf.web.controller.base.AbstractDiscGolfController;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import static com.pliesveld.discgolf.domain.GameStatus.PLAYING;
@@ -28,7 +30,13 @@ public class GameController extends AbstractDiscGolfController {
     }
 
     @PostMapping
-    public ResponseEntity<?> handleNewGame(@RequestParam(name = "players")List<String> _players, @RequestParam(name = "course") String courseName) {
+    public ResponseEntity<?> handleNewGame(
+            @Valid
+            @RequestBody NewGame newGame
+    ) {
+
+        final String courseName = newGame.getCourse();
+        final Collection<String> _players = newGame.getPlayers();
 
         final Course course = courseRepository.findByName(courseName);
         if (course == null) throw new GameException("Invalid course");
@@ -114,4 +122,6 @@ public class GameController extends AbstractDiscGolfController {
         publisher.publishEvent(new GameUpdateEvent(updatedGame, scoreCard));
         return ResponseEntity.ok(updatedGame);
     }
+
+
 }
