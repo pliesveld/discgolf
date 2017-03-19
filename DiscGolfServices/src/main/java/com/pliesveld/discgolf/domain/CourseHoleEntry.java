@@ -32,10 +32,12 @@ public class CourseHoleEntry {
         private Tee tee;
         @NotNull
         private Basket basket;
+        private HoleInfo holeInfo;
 
-        public TeeBasket(Tee tee, Basket basket) {
+        public TeeBasket(Tee tee, Basket basket, HoleInfo holeInfo) {
             this.tee = tee;
             this.basket = basket;
+            this.holeInfo = holeInfo;
         }
 
         public Tee getTee() { return tee; }
@@ -45,6 +47,10 @@ public class CourseHoleEntry {
         public Basket getBasket() { return basket; }
 
         public void setBasket(Basket basket) { this.basket = basket; }
+
+        public HoleInfo getHoleInfo() { return holeInfo; }
+
+        public void setHoleInfo(HoleInfo holeInfo) { this.holeInfo = holeInfo; }
 
         @Override
         public boolean equals(Object o) {
@@ -71,16 +77,36 @@ public class CourseHoleEntry {
     @NotNull @NotEmpty
     private Set<Basket> baskets = new HashSet<>();
 
-    private Map<TeeBasket, HoleInfo> info = new LinkedHashMap<>();
+    private Map<Color, Set<TeeBasket>> colorTeeBasketMap = new LinkedHashMap<>();
 
     private GeoJsonPolygon bounds;
+
+    public Set<Tee> getTees() { return tees; }
+
+    public void setTees(Set<Tee> tees) { this.tees = tees; }
+
+    public Set<Basket> getBaskets() { return baskets; }
+
+    public void setBaskets(Set<Basket> baskets) { this.baskets = baskets; }
+
+    public Map<Color,Set<TeeBasket>> getColorTeeBasketMap() { return colorTeeBasketMap; }
+
+    public void setColorTeeBasketMap(Map<Color,Set<TeeBasket>> colorTeeBasketMap) { this.colorTeeBasketMap = colorTeeBasketMap; }
+
+    public GeoJsonPolygon getBounds() { return bounds; }
+
+    public void setBounds(GeoJsonPolygon bounds) { this.bounds = bounds; }
 
     public void addHole(Tee tee, Basket basket, HoleInfo holeInfo) {
         baskets.add(basket);
         tees.add(tee);
-        TeeBasket teeBasket = new TeeBasket(tee,basket);
-        info.put(teeBasket, holeInfo);
+        TeeBasket teeBasket = new TeeBasket(tee,basket,holeInfo);
+        Set<TeeBasket> teeBaskets = colorTeeBasketMap.get(tee.getColor());
+        if (teeBaskets == null) {
+            teeBaskets = new HashSet<>();
+        }
+        teeBaskets.add(teeBasket);
+        colorTeeBasketMap.put(tee.getColor(), teeBaskets);
     }
-
-
 }
+

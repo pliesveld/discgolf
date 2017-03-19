@@ -42,6 +42,15 @@ public abstract class BaseMongoTest extends AbstractJUnit4SpringContextTests {
         return player1;
     }
 
+    protected CourseHoleEntry newCourseHoleEntry(Tee tee, Basket basket) {
+        CourseHoleEntry courseHoleEntry = new CourseHoleEntry();
+        CourseHoleEntry.HoleInfo holeInfo = new CourseHoleEntry.HoleInfo(3, 200);
+        courseHoleEntry.addHole(tee, basket, holeInfo);
+        return courseHoleEntry;
+    }
+
+
+    @Deprecated
     protected CourseHoleEntry newCourseHoleEntry(Basket basket, Tee tee) {
         CourseHoleEntry courseHoleEntry = new CourseHoleEntry();
         CourseHoleEntry.HoleInfo holeInfo = new CourseHoleEntry.HoleInfo(3, 200);
@@ -53,12 +62,12 @@ public abstract class BaseMongoTest extends AbstractJUnit4SpringContextTests {
         Course course = new Course();
         course.setName("SampleGameCourse");
 
-        Basket basket = newBasket();
-        Tee tee = new Tee(Color.WHITE);
 
         Map<Integer, CourseHoleEntry> holes = new LinkedHashMap<>();
         for(int i = 1 ; i <= 18; i++) {
-            holes.put(i, newCourseHoleEntry(basket, tee));
+            Basket basket = newBasket();
+            Tee tee = new Tee(Color.WHITE);
+            holes.put(i, newCourseHoleEntry(tee, basket));
         }
 
         course.setHoles(holes);

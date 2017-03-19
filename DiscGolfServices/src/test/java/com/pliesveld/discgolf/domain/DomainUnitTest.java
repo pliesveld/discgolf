@@ -17,6 +17,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import javax.validation.ConstraintViolationException;
+import java.util.Collections;
 import java.util.EnumSet;
 
 import static org.junit.Assert.*;
@@ -48,7 +49,6 @@ public class DomainUnitTest extends BaseMongoTest {
         LOG.debug(toJson(player));
     }
 
-
     @Test
     public void givenBasket_shouldJSON() throws Exception {
         Basket basket = newBasket();
@@ -67,6 +67,24 @@ public class DomainUnitTest extends BaseMongoTest {
         LOG.debug(toJson(course));
     }
 
+    @Test
+    public void givenScoreCard_shouldJSON() throws Exception {
+        ScoreCard scoreCard = new ScoreCard();
+        scoreCard.setBasket(Color.WHITE);
+        scoreCard.setTee(Color.WHITE);
+        scoreCard.setCurrentHole(1);
+        LOG.debug(toJson(scoreCard));
+    }
 
-
+    @Test
+    public void givenGame_shouldJSON() throws Exception {
+        Player player = newPlayer();
+        Game game = new Game();
+        game.setGameStatus(GameStatus.NEW);
+        game.setCourse(newCourse());
+        game.setPlayers(Collections.singleton(player));
+        Course course = newCourse();
+        LOG.debug(toJson(course));
+    }
 }
+
