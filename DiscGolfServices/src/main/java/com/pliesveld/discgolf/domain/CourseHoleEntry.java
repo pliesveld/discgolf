@@ -101,10 +101,7 @@ public class CourseHoleEntry {
         baskets.add(basket);
         tees.add(tee);
         TeeBasket teeBasket = new TeeBasket(tee,basket,holeInfo);
-        Set<TeeBasket> teeBaskets = colorTeeBasketMap.get(tee.getColor());
-        if (teeBaskets == null) {
-            teeBaskets = new HashSet<>();
-        }
+        Set<TeeBasket> teeBaskets = colorTeeBasketMap.getOrDefault(tee.getColor(), new HashSet<>());
         teeBaskets.add(teeBasket);
         colorTeeBasketMap.put(tee.getColor(), teeBaskets);
     }
