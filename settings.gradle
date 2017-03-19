@@ -1,2 +1,2 @@
-include 'DiscGolfCommon', 'DiscGolfPersistence', 'DiscGolfService', 'DiscGolfWeb', 'DiscGolfIntegrationTest'
+include 'DiscGolfCommon', 'DiscGolfPersistence', 'DiscGolfSecurity', 'DiscGolfService', 'DiscGolfWeb', 'DiscGolfIntegrationTest'
 

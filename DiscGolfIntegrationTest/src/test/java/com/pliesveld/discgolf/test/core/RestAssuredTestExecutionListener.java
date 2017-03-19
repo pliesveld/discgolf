@@ -33,11 +33,10 @@ public class RestAssuredTestExecutionListener extends AbstractTestExecutionListe
         beanFactory.autowireBeanProperties(this,AutowireCapableBeanFactory.AUTOWIRE_BY_TYPE, false);
         beanFactory.initializeBean(this,this.getClass().getName());
 
-        LOG.debug("LocalServerPort: {}", port);
-        LOG.debug("EmbeddedServerletContainer port: {}",server.getEmbeddedServletContainer().getPort());
+        LOG.trace("LocalServerPort: {}", port);
+        LOG.trace("EmbeddedServerletContainer port: {}",server.getEmbeddedServletContainer().getPort());
 
         RestAssured.port = port;
-
     }
 
     @Override

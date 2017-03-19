@@ -4,6 +4,7 @@
     "name": "DiscGolfLoggingConfig",
     "monitorInterval": "120",
     "verbose": "false",
+    "shutdownHook": "disable",
     "ThresholdFilter": { "level": "TRACE" },
     "appenders": {
       "Console": {
@@ -14,6 +15,7 @@
     "loggers": {
       "logger": [
         { "name": "org.springframework", "level": "ERROR" },
+        { "name": "com.pliesveld.discgolf", "level": "DEBUG" },
         { "name": "org.mongodb.driver.protocol", "level": "DEBUG" },
         { "name": "org.springframework.data.document.mongodb", "level": "DEBUG" }
       ],

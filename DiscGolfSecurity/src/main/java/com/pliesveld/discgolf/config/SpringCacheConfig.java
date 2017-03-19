@@ -1,4 +1,4 @@
-package com.pliesveld.discgolf.config.cache;
+package com.pliesveld.discgolf.config;
 
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.guava.GuavaCache;

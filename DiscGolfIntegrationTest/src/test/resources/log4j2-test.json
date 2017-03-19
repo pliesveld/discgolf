@@ -2,8 +2,9 @@
   "configuration": {
     "status": "WARN",
     "name": "DiscGolfLoggingConfig",
-    "monitorInterval": "120",
+    "monitorInterval": "10",
     "verbose": "false",
+    "shutdownHook": "disable",
     "ThresholdFilter": { "level": "TRACE" },
     "appenders": {
       "Console": {
