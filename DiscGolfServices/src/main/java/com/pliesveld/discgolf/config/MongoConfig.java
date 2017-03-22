@@ -39,13 +39,12 @@ public class MongoConfig extends AbstractMongoConfiguration {
     @Bean
     public Module registerGeoJsonModule(){ return new GeoJsonModule(); }
 
-    @Bean
-    public ValidatingMongoEventListener validatingMongoEventListener() { return new ValidatingMongoEventListener(validator()); }
-
-    @Bean
-    public LocalValidatorFactoryBean validator() {
-        return new LocalValidatorFactoryBean();
-    }
+//    @Bean
+//    public ValidatingMongoEventListener validatingMongoEventListener() { return new ValidatingMongoEventListener(validator()); }
+////    @Bean
+//    public LocalValidatorFactoryBean validator() {
+//        return new LocalValidatorFactoryBean();
+//    }
 
 }
 

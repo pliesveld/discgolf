@@ -22,7 +22,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.springframework.test.context.TestExecutionListeners.MergeMode.MERGE_WITH_DEFAULTS;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@TestExecutionListeners(listeners = {MongoTestExecutionListener.class}, mergeMode = MERGE_WITH_DEFAULTS)
+//@TestExecutionListeners(listeners = {MongoTestExecutionListener.class}, mergeMode = MERGE_WITH_DEFAULTS)
 @Ignore("Not a real test.")
 public abstract class BaseMongoTest extends AbstractJUnit4SpringContextTests {
     private static final Logger LOG = LogManager.getLogger();

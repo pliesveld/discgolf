@@ -12,7 +12,7 @@ buildscript {
 }*/
 
 plugins {
-	id 'org.springframework.boot' version '1.5.1.RELEASE'
+	id 'org.springframework.boot' version '1.5.2.RELEASE'
 }
 
 apply plugin: 'java'
@@ -81,6 +81,8 @@ dependencies {
 
 	compile('com.google.guava:guava:21.0')
 	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.5'
+
+    compile group: 'com.h2database', name: 'h2', version: '1.4.194'
 
 	compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.7.0'
 	compile('com.zaxxer:HikariCP:2.6.0')
