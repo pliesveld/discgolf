@@ -1,0 +1,8 @@
+version: '2'
+services:
+  mongo-server:
+    build: MongoServer/
+    ports:
+     - "27017:27017"
+    volumes:
+     - /tmp/mongodb:/data/db2
