@@ -6,3 +6,11 @@ services:
      - "27017:27017"
     volumes:
      - /tmp/mongodb:/data/db2
+  postgres-server:
+    image: postgres:alpine
+    environment:
+      - POSTGRES_PASSWORD=password
+    ports:
+     - "5432:5432"
+    volumes:
+     - /tmp/sqldb:/usr/local/pgsql/data
