@@ -3,6 +3,7 @@ package com.pliesveld.discgolf.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import org.springframework.data.mongodb.core.geo.GeoJsonModule;
 import org.springframework.data.mongodb.core.mapping.event.ValidatingMongoEventListener;
@@ -18,6 +19,7 @@ import com.pliesveld.discgolf.repository.PlayerRepository;
 @Configuration
 @EnableMongoRepositories(basePackageClasses = PlayerRepository.class)
 //@EnableMongoAuditing(auditorAwareRef = "springSecurityAuditorAware")
+@Profile("PROD")
 public class MongoConfig extends AbstractMongoConfiguration {
 
     @Value("${spring.data.mongodb.database}")

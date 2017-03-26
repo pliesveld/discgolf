@@ -28,7 +28,7 @@ public abstract class BaseMongoTest extends AbstractJUnit4SpringContextTests {
     private static final Logger LOG = LogManager.getLogger();
 
     @Configuration
-    @Import(MongoConfig.class)
+//    @Import(MongoConfig.class)
     public static class Confg {}
 
 	protected Basket newBasket() {

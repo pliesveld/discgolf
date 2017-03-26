@@ -10,6 +10,10 @@ import org.springframework.boot.context.TypeExcludeFilter;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 
+import org.apache.catalina.authenticator.jaspic.AuthConfigFactoryImpl;
+
+import javax.security.auth.message.config.AuthConfigFactory;
+
 @SpringBootConfiguration
 @EnableAutoConfiguration
 @ComponentScan(excludeFilters = {
@@ -18,6 +22,9 @@ import org.springframework.context.annotation.FilterType;
 public class DiscgolfApplication {
 
 	public static void main(String[] args) {
+        if (AuthConfigFactory.getFactory() == null) {
+            AuthConfigFactory.setFactory(new AuthConfigFactoryImpl());
+        }
 		SpringApplication.run(DiscgolfApplication.class, args);
 	}
 }
