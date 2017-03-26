@@ -21,7 +21,7 @@ test.dependsOn importMongoReferenceData
 
 dependencies {
     testCompile('io.rest-assured:rest-assured:3.0.2')
-    testCompile project(':DiscGolfServices')
+    testCompile project(':DiscGolfWeb')
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('io.rest-assured:spring-mock-mvc:3.0.2')
 }

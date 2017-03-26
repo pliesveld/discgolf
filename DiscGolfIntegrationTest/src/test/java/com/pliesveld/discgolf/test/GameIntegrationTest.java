@@ -1,13 +1,11 @@
 package com.pliesveld.discgolf.test;
 
-import com.pliesveld.discgolf.domain.Course;
-import com.pliesveld.discgolf.domain.GameStatus;
-import com.pliesveld.discgolf.domain.Player;
+import com.pliesveld.discgolf.persistence.domain.Course;
+import com.pliesveld.discgolf.persistence.domain.Player;
 import com.pliesveld.discgolf.test.core.AbstractDiscGolfIntegrationTest;
 import io.restassured.response.Response;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.hamcrest.collection.IsArray;
 import org.junit.Test;
 
 import static io.restassured.RestAssured.*;
