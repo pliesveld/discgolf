@@ -17,11 +17,34 @@ sourceCompatibility = 1.8
 subprojects {
 	apply plugin: 'java'
 	apply plugin: 'maven'
+    apply plugin: 'jacoco'
 
 	repositories {
 		mavenCentral()
 		maven{ url { 'http://maven.springframework.org/snapshots/' }}
 	}
-}
 
+    task jacocoRootTestReport(type: JacocoReport) {
+
+        sourceSets sourceSets.main
+
+        def jacocoTestFiles = ["$buildDir/jacoco/test.exec"]
+        subprojects.each { p ->
+            def coverageFileLocation = "$p.buildDir/jacoco/test.exec"
+            if (new File(coverageFileLocation).exists()) {
+                jacocoTestFiles << coverageFileLocation
+            }
+        }
+
+        logger.info('Aggregating next JaCoCo Coverage Files: {}', jacocoTestFiles)
+        executionData files(jacocoTestFiles)
+
+        reports {
+            xml.enabled false
+            csv.enabled false
+            html.enabled true
+        }
+    }
+
+}
 
