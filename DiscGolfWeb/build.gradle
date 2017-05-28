@@ -1,24 +1,14 @@
-/*
-buildscript {
-	ext {
-		springBootVersion = '1.5.1.RELEASE'
-	}
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-	}
-}*/
-
 plugins {
-	id 'org.springframework.boot' version '1.5.2.RELEASE'
+	id 'org.springframework.boot' version '1.5.3.RELEASE'
 }
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 
+springBoot {
+	mainClass = 'com.pliesveld.discgolf.DiscgolfApplication'
+}
 bootRepackage {
 	mainClass = 'com.pliesveld.discgolf.DiscgolfApplication'
 }
@@ -29,7 +19,7 @@ bootRun {
 	]
 }
 
-task fatjar(type: BootRepackage, dependsOn: jar) {
+task springBootJar(type: BootRepackage, dependsOn: jar) {
 	executable = true
 }
 
