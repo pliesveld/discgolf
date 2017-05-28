@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 services:
   mongo-server:
     build: MongoServer/
@@ -6,6 +6,7 @@ services:
      - "27017:27017"
     volumes:
      - /tmp/mongodb:/data/db2
+    networks: [discgolfnetwork]
   postgres-server:
     image: postgres:alpine
     environment:
@@ -14,3 +15,8 @@ services:
      - "5432:5432"
     volumes:
      - /tmp/sqldb:/usr/local/pgsql/data
+    networks: [discgolfnetwork]
+
+networks:
+  discgolfnetwork:
+    driver: bridge
