@@ -1,6 +1,9 @@
 package com.pliesveld.discgolf.test.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -14,6 +17,7 @@ import org.junit.runner.RunWith;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -23,6 +27,10 @@ import static org.junit.Assert.assertNotNull;
 @Ignore("Not a real test.")
 public abstract class BaseMongoTest extends AbstractJUnit4SpringContextTests {
     private static final Logger LOG = LogManager.getLogger();
+
+    @Autowired
+    private MongoOperations mongoTemplate;
+
 
     @Configuration
     public static class Confg {
@@ -40,6 +48,7 @@ public abstract class BaseMongoTest extends AbstractJUnit4SpringContextTests {
     protected Player newPlayer() {
         Player player1 = new Player();
         player1.setName("Player1");
+        player1.setId(UUID.randomUUID().toString());
         return player1;
     }
 
@@ -62,6 +71,7 @@ public abstract class BaseMongoTest extends AbstractJUnit4SpringContextTests {
     protected Course newCourse() {
         Course course = new Course();
         course.setName("SampleGameCourse");
+        course.setId(UUID.randomUUID().toString());
 
 
         Map<Integer, CourseHoleEntry> holes = new LinkedHashMap<>();

@@ -28,6 +28,10 @@ public class Course {
     @Size(min = 1, max = 32)
     private Map<Integer,CourseHoleEntry> holes = new LinkedHashMap<>();
 
+    public String getId() { return id; }
+
+    public void setId(String id) { this.id = id; }
+
     public String getName() { return name; }
 
     public void setName(String name) { this.name = name; }

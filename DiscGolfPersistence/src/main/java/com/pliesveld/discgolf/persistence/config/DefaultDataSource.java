@@ -19,6 +19,13 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.SharedCacheMode;
 import javax.persistence.ValidationMode;
 import javax.sql.DataSource;
+
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.nio.charset.Charset;
+import java.sql.SQLException;
+import java.util.Locale;
 import java.util.Properties;
 
 import static com.pliesveld.discgolf.common.logging.Markers.SQL_INIT;
@@ -34,7 +41,7 @@ public class DefaultDataSource {
     private Environment environment;
 
     @Bean
-    public DataSource dataSource() {
+    public DataSource dataSource() throws SQLException {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(environment.getRequiredProperty("jdbc.driverClassName"));
         dataSource.setUrl(environment.getRequiredProperty("jdbc.url"));
@@ -55,7 +62,10 @@ public class DefaultDataSource {
         }
 
         HikariDataSource hikariDataSource = new HikariDataSource();
+        hikariDataSource.setLogWriter(new PrintWriter(new OutputStreamWriter(System.out, Charset.forName("UTF-8")), true));
         hikariDataSource.setAutoCommit(false);
+        hikariDataSource.setLoginTimeout(2);
+        hikariDataSource.setInitializationFailTimeout(2);
         hikariDataSource.setDataSource(dataSource);
         return hikariDataSource;
     }

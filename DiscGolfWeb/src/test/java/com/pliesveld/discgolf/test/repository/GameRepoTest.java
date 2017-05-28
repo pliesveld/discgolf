@@ -40,6 +40,7 @@ public class GameRepoTest extends BaseMongoTest {
 		Course course = newCourse();
 
 		Game game = new Game(course, Arrays.asList(player));
+		game.setId(UUID.randomUUID().toString());
 		Game savedGame = gameRepository.save(game);
 
 		assertNotNull(savedGame);

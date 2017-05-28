@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" name="UnitTest" packages="org.apache.logging.log4j.test" shutdownHook="disable">
+
+    <Properties>
+        <Property name="LOG_ROOT_LEVEL">INFO</Property>
+        <Property name="LOG_APP_LEVEL">ALL</Property>
+        <Property name="LOG_PERSISTENCE_LEVEL">DEBUG</Property>
+        <Property name="LOG_BEANS_LEVEL">WARN</Property>
+        <Property name="LOG_BEANS_CACHED_LEVEL">WARN</Property>
+        <Property name="LOG_TEST_LEVEL">WARN</Property>
+    </Properties>
+
+    <ThresholdFilter level="ALL"/>
+
+    <Appenders>
+        <Console name="CONSOLE" target="SYSTEM_OUT">
+            <PatternLayout pattern="%highlight{%-5level}{FATAL=red blink, ERROR=red, WARN=yellow bold, INFO=black, DEBUG=green bold, TRACE=blue} %-20logger{1.} %msg%n"/>
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <logger name="com.pliesveld.discgolf" level="${sys:LOG_APP_LEVEL}" additivity="false">
+            <AppenderRef ref="CONSOLE"/>
+        </logger>
+
+        <logger name="org.mongodb" level="${sys:LOG_PERSISTENCE_LEVEL}" additivity="false">
+            <AppenderRef ref="CONSOLE"/>
+        </logger>
+
+        <logger name="org.springframework.data.document.mongodb" level="${sys:LOG_PERSISTENCE_LEVEL}" additivity="false">
+            <AppenderRef ref="CONSOLE"/>
+        </logger>
+
+        <logger name="org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener" level="${sys:LOG_TEST_LEVEL}" additivity="false">
+            <AppenderRef ref="CONSOLE"/>
+        </logger>
+
+        <logger name="org.springframework.beans" level="${sys:LOG_BEANS_LEVEL}" additivity="false">
+            <AppenderRef ref="CONSOLE"/>
+        </logger>
+
+        <logger name="org.springframework.beans.CachedIntrospectionResults" level="${sys:LOG_BEANS_CACHED_LEVEL}" additivity="false">
+            <AppenderRef ref="CONSOLE"/>
+        </logger>
+
+        <Root level="${sys:LOG_ROOT_LEVEL}">
+            <AppenderRef ref="CONSOLE"/>
+        </Root>
+    </Loggers>
+</Configuration>
