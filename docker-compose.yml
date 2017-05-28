@@ -16,7 +16,13 @@ services:
     volumes:
      - /tmp/sqldb:/usr/local/pgsql/data
     networks: [discgolfnetwork]
+  mail-server:
+    build: MailServer/
+    ports:
+      - "2525:2525"
+    networks: [discgolfnetwork]
 
 networks:
   discgolfnetwork:
     driver: bridge
+
