@@ -1,6 +1,7 @@
 package com.pliesveld.discgolf.persistence.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.geo.GeoJsonModule;
@@ -26,6 +27,7 @@ public class MongoConfig {
 
     @Bean
     @Autowired
+    @ConditionalOnBean(javax.validation.Validator.class)
     public ValidatingMongoEventListener validatingMongoEventListener(javax.validation.Validator validator) { return new ValidatingMongoEventListener(validator); }
 
 }

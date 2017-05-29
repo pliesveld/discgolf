@@ -10,24 +10,21 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
-import com.pliesveld.discgolf.persistence.repository.sql.PlayerTestRepository;
-import com.zaxxer.hikari.HikariDataSource;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.SharedCacheMode;
 import javax.persistence.ValidationMode;
 import javax.sql.DataSource;
 
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.nio.charset.Charset;
 import java.sql.SQLException;
-import java.util.Locale;
 import java.util.Properties;
 
+import com.pliesveld.discgolf.persistence.repository.sql.PlayerTestRepository;
+import com.zaxxer.hikari.HikariDataSource;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import static com.pliesveld.discgolf.common.logging.Markers.SQL_INIT;
 
 @Configuration
@@ -64,8 +61,8 @@ public class DefaultDataSource {
         HikariDataSource hikariDataSource = new HikariDataSource();
         hikariDataSource.setLogWriter(new PrintWriter(new OutputStreamWriter(System.out, Charset.forName("UTF-8")), true));
         hikariDataSource.setAutoCommit(false);
-        hikariDataSource.setLoginTimeout(2);
-        hikariDataSource.setInitializationFailTimeout(2);
+//        hikariDataSource.setLoginTimeout(2);
+//        hikariDataSource.setInitializationFailTimeout(2);
         hikariDataSource.setDataSource(dataSource);
         return hikariDataSource;
     }

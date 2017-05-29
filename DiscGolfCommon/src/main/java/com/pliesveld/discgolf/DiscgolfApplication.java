@@ -8,9 +8,9 @@ import org.springframework.boot.context.TypeExcludeFilter;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 
-import org.apache.catalina.authenticator.jaspic.AuthConfigFactoryImpl;
-
 import javax.security.auth.message.config.AuthConfigFactory;
+
+import org.apache.catalina.authenticator.jaspic.AuthConfigFactoryImpl;
 
 @SpringBootConfiguration
 @EnableAutoConfiguration

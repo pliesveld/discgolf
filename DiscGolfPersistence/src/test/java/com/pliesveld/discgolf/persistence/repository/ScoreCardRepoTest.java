@@ -1,25 +1,24 @@
-package com.pliesveld.discgolf.test.repository;
+package com.pliesveld.discgolf.persistence.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.pliesveld.discgolf.persistence.domain.Player;
-import com.pliesveld.discgolf.common.domain.Score;
-import com.pliesveld.discgolf.common.domain.ScoreCard;
-import com.pliesveld.discgolf.persistence.repository.mongo.PlayerRepository;
-import com.pliesveld.discgolf.persistence.repository.mongo.ScoreCardRepository;
-import com.pliesveld.discgolf.test.config.BaseMongoTest;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import java.util.Arrays;
 
+import com.pliesveld.discgolf.common.domain.Score;
+import com.pliesveld.discgolf.common.domain.ScoreCard;
+import com.pliesveld.discgolf.persistence.AbstractMongoTest;
+import com.pliesveld.discgolf.persistence.domain.Player;
+import com.pliesveld.discgolf.persistence.repository.mongo.PlayerRepository;
+import com.pliesveld.discgolf.persistence.repository.mongo.ScoreCardRepository;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
-public class ScoreCardRepoTest extends BaseMongoTest {
+public class ScoreCardRepoTest extends AbstractMongoTest {
 
 	@Autowired
 	private PlayerRepository playerRepository;

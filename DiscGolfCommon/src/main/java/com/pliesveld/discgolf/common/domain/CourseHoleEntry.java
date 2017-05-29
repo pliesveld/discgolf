@@ -2,10 +2,14 @@ package com.pliesveld.discgolf.common.domain;
 
 import org.springframework.data.mongodb.core.geo.GeoJsonPolygon;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 import javax.validation.constraints.NotNull;
-import java.util.*;
+
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 public class CourseHoleEntry {
 

@@ -70,7 +70,10 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-validation')
 	//compile 'org.springframework.data:spring-data-mongodb:1.10.0.RELEASE'
 
-	compile('javax:javaee-api:7.0')
+//	compile('javax:javaee-api:7.0')
+
+	testCompile 'org.apache.tomcat:tomcat-el-api:8.5.14'
+	testCompile 'org.apache.tomcat:tomcat-jasper-el:8.5.14'
 
 	compile('com.google.guava:guava:21.0')
 	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.5'

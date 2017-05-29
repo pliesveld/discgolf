@@ -3,14 +3,15 @@ package com.pliesveld.discgolf.persistence.domain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.pliesveld.discgolf.common.domain.CourseHoleEntry;
-import org.hibernate.validator.constraints.NotEmpty;
-
 import javax.persistence.GeneratedValue;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import com.pliesveld.discgolf.common.domain.CourseHoleEntry;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Document
 public class Course {

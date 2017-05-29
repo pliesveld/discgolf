@@ -1,9 +1,9 @@
 package com.pliesveld.discgolf.common.domain;
 
-import com.pliesveld.discgolf.common.exception.GameException;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.pliesveld.discgolf.common.exception.GameException;
 
 public class ScoreCard {
 

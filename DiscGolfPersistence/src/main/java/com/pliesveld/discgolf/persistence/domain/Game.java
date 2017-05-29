@@ -6,13 +6,18 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.persistence.GeneratedValue;
+
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.pliesveld.discgolf.common.domain.GameStatus;
 import com.pliesveld.discgolf.common.domain.ScoreCard;
 import com.pliesveld.discgolf.common.exception.GameException;
-
-import javax.persistence.GeneratedValue;
-import java.time.Instant;
-import java.util.*;
 
 @Document
 public class Game {

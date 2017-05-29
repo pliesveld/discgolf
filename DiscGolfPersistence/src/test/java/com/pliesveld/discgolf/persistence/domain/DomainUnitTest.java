@@ -1,34 +1,25 @@
-package com.pliesveld.discgolf.test.domain;
+package com.pliesveld.discgolf.persistence.domain;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.convert.MongoConverter;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
+
+import java.util.Collections;
+
 import com.pliesveld.discgolf.common.domain.Basket;
 import com.pliesveld.discgolf.common.domain.Color;
 import com.pliesveld.discgolf.common.domain.GameStatus;
 import com.pliesveld.discgolf.common.domain.ScoreCard;
 import com.pliesveld.discgolf.common.domain.Tee;
-import com.pliesveld.discgolf.persistence.domain.Course;
-import com.pliesveld.discgolf.persistence.domain.Game;
-import com.pliesveld.discgolf.persistence.domain.Player;
-import com.pliesveld.discgolf.test.config.BaseMongoTest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import java.util.Collections;
-
 import static org.junit.Assert.*;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest
 public class DomainUnitTest extends BaseMongoTest {
     final static private Logger LOG = LogManager.getLogger();
 

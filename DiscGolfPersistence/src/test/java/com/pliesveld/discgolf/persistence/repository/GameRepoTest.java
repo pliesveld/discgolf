@@ -1,26 +1,26 @@
-package com.pliesveld.discgolf.test.repository;
+package com.pliesveld.discgolf.persistence.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Arrays;
+import java.util.UUID;
+
+import com.pliesveld.discgolf.persistence.AbstractMongoTest;
 import com.pliesveld.discgolf.persistence.domain.Course;
 import com.pliesveld.discgolf.persistence.domain.Game;
 import com.pliesveld.discgolf.persistence.domain.Player;
 import com.pliesveld.discgolf.persistence.repository.mongo.CourseRepository;
 import com.pliesveld.discgolf.persistence.repository.mongo.GameRepository;
 import com.pliesveld.discgolf.persistence.repository.mongo.PlayerRepository;
-import com.pliesveld.discgolf.test.config.BaseMongoTest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import java.util.*;
-
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
-public class GameRepoTest extends BaseMongoTest {
+public class GameRepoTest extends AbstractMongoTest {
 
     @Autowired
 	private CourseRepository courseRepository;

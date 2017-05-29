@@ -6,9 +6,9 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.util.Assert;
 
-import com.pliesveld.discgolf.common.domain.ScoreCard;
-
 import javax.persistence.GeneratedValue;
+
+import com.pliesveld.discgolf.common.domain.ScoreCard;
 
 @Document
 public class Player {
