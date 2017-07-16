@@ -7,13 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pliesveld.discgolf.common.domain.test.Location;
-import com.pliesveld.discgolf.web.controller.base.AbstractDiscGolfController;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @RestController
 @RequestMapping("/location")
-public class LocationController extends AbstractDiscGolfController {
+public class LocationController {
     final static private Logger LOG = LogManager.getLogger();
 
     @PostMapping

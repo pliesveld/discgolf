@@ -1,16 +1,21 @@
 package com.pliesveld.discgolf.web.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.pliesveld.discgolf.common.domain.*;
+import com.pliesveld.discgolf.common.domain.GameStatus;
+import com.pliesveld.discgolf.common.domain.ScoreCard;
 import com.pliesveld.discgolf.common.exception.GameException;
 import com.pliesveld.discgolf.persistence.domain.Course;
 import com.pliesveld.discgolf.persistence.domain.Game;
 import com.pliesveld.discgolf.persistence.domain.Player;
+import com.pliesveld.discgolf.persistence.repository.mongo.CourseRepository;
+import com.pliesveld.discgolf.persistence.repository.mongo.GameRepository;
+import com.pliesveld.discgolf.persistence.repository.mongo.PlayerRepository;
 import com.pliesveld.discgolf.service.events.GameEvent;
 import com.pliesveld.discgolf.service.events.GameUpdateEvent;
-import com.pliesveld.discgolf.web.controller.base.AbstractDiscGolfController;
 import com.pliesveld.discgolf.web.domain.NewGame;
 
 import javax.validation.Valid;
@@ -22,7 +27,19 @@ import static com.pliesveld.discgolf.common.domain.GameStatus.PLAYING;
 
 @RestController
 @RequestMapping("/game")
-public class GameController extends AbstractDiscGolfController {
+public class GameController {
+
+    @Autowired
+    private GameRepository gameRepository;
+
+    @Autowired
+    private CourseRepository courseRepository;
+
+    @Autowired
+    private PlayerRepository playerRepository;
+
+    @Autowired
+    private ApplicationEventPublisher publisher;
 
     @GetMapping(path = "/id/{id}")
     public ResponseEntity<?> handlePlayerById(@PathVariable("id") String gameId) {
