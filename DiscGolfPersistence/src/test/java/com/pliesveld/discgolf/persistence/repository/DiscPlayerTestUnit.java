@@ -4,18 +4,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.EntityManager;
 
-import com.pliesveld.discgolf.common.domain.test.PlayerTest;
+import com.pliesveld.discgolf.common.domain.DiscPlayer;
 import com.pliesveld.discgolf.persistence.AbstractHibernateTest;
-import com.pliesveld.discgolf.persistence.repository.sql.PlayerTestRepository;
+import com.pliesveld.discgolf.persistence.repository.sql.DiscPlayerRepository;
 import org.junit.Test;
 
-public class PlayerTestUnitTest extends AbstractHibernateTest {
+public class DiscPlayerTestUnit extends AbstractHibernateTest {
 
     @Autowired
     private EntityManager entityManager;
 
     @Autowired
-    private PlayerTestRepository playerTestRepository;
+    private DiscPlayerRepository discPlayerRepository;
 
 
     @Test
@@ -23,8 +23,8 @@ public class PlayerTestUnitTest extends AbstractHibernateTest {
 
     @Test
     public void whenRepositorySave_shouldPersist() throws Exception {
-        PlayerTest playerTest = new PlayerTest();
-        playerTest.setName("Some name");
-        playerTestRepository.save(playerTest);
+        DiscPlayer discPlayer = new DiscPlayer();
+        discPlayer.setName("Some name");
+        discPlayerRepository.save(discPlayer);
     }
 }

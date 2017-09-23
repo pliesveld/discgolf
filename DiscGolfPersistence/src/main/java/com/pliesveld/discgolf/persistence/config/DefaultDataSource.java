@@ -21,7 +21,7 @@ import java.nio.charset.Charset;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import com.pliesveld.discgolf.persistence.repository.sql.PlayerTestRepository;
+import com.pliesveld.discgolf.persistence.repository.sql.DiscPlayerRepository;
 import com.zaxxer.hikari.HikariDataSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -29,7 +29,7 @@ import static com.pliesveld.discgolf.common.logging.Markers.SQL_INIT;
 
 @Configuration
 @PropertySource(value = {"classpath:dev-datasource.properties"})
-@EnableJpaRepositories(basePackageClasses = PlayerTestRepository.class)
+@EnableJpaRepositories(basePackageClasses = DiscPlayerRepository.class)
 public class DefaultDataSource {
     private static final Logger LOG = LogManager.getLogger();
     private static final String PROPERTY_NAME_ENTITYMANAGER_PACKAGES_TO_SCAN = "entitymanager.packages.to.scan";

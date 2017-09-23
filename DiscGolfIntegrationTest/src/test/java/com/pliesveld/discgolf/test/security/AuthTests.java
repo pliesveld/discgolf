@@ -15,6 +15,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 import org.springframework.test.annotation.Repeat;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.util.StopWatch;
 
@@ -38,6 +39,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -48,6 +50,8 @@ import static org.hamcrest.Matchers.notNullValue;
 
 
 //@SpringBootTest(classes = {SpringCacheConfig.class, SpringSecurityConfig.class, SpringMailConfig.class, PersistenceContext.class, AuthTests.class})
+@RunWith(SpringRunner.class)
+@Ignore("disabled authentication tests")
 public class AuthTests extends AbstractDiscGolfIntegrationTest {
     private static final Logger LOG = LogManager.getLogger();
 
@@ -80,6 +84,7 @@ public class AuthTests extends AbstractDiscGolfIntegrationTest {
 
     @Test
     @Repeat(value = 10)
+    @Ignore("disabled authentication tests")
     public void contextLoad() {
         int port = Integer.valueOf(this.port);
         String URL_BASE = "http://localhost:" + port;

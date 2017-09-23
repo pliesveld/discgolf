@@ -9,7 +9,7 @@ import javax.persistence.EntityManager;
 
 import com.pliesveld.discgolf.DiscgolfApplication;
 import com.pliesveld.discgolf.persistence.config.PersistenceContext;
-import com.pliesveld.discgolf.persistence.repository.sql.PlayerTestRepository;
+import com.pliesveld.discgolf.persistence.repository.sql.DiscPlayerRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
@@ -23,11 +23,11 @@ public abstract class AbstractHibernateTest {
     private EntityManager entityManager;
 
     @Autowired
-    private PlayerTestRepository playerTestRepository;
+    private DiscPlayerRepository discPlayerRepository;
 
     @Test
     public void givenContext_shouldLoad() throws Exception {
         assertNotNull(entityManager);
-        assertNotNull(playerTestRepository);
+        assertNotNull(discPlayerRepository);
     }
 }

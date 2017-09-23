@@ -1,4 +1,4 @@
-package com.pliesveld.discgolf.common.domain.test;
+package com.pliesveld.discgolf.common.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "PLAYER_TEST")
-public class PlayerTest {
+public class DiscPlayer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
