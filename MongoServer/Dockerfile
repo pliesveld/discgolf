@@ -1,9 +1,16 @@
 FROM mongo:latest
 
-RUN mkdir -p /data/scripts
+COPY scripts/heartbeat.sh /usr/local/bin/heartbeat
 
-COPY mongodb.conf /etc/
+COPY init.d/ /docker-entrypoint-initdb.d/
 
-VOLUME /data/db2
-CMD ["mongod", "--config", "/etc/mongodb.conf", "--smallfiles"]
+RUN bash -c 'mkdir -p /opt/mongo_data'
+
+ENV MONGO_INITDB_DATA /opt/mongo_data
+
+ENV MONGO_INITDB_DATABASE discgolf
+
+COPY data/ /opt/mongo_data/
+
+CMD ["mongod"]
 

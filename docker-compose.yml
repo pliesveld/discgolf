@@ -4,8 +4,8 @@ services:
     build: MongoServer/
     ports:
      - "27017:27017"
-    volumes:
-     - /tmp/mongodb:/data/db2
+#    volumes:
+#     - /tmp/mongodb:/data/db2
     networks: [discgolfnetwork]
   postgres-server:
     image: postgres:alpine
@@ -13,8 +13,8 @@ services:
       - POSTGRES_PASSWORD=password
     ports:
      - "5432:5432"
-    volumes:
-     - /tmp/sqldb:/usr/local/pgsql/data
+#    volumes:
+#     - /tmp/sqldb:/usr/local/pgsql/data
     networks: [discgolfnetwork]
   mail-server:
     build: MailServer/
