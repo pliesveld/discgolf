@@ -37,7 +37,7 @@ public class SpringTaskConfig implements AsyncConfigurer, SchedulingConfigurer {
         scheduler.setPoolSize(20);
         scheduler.setThreadNamePrefix("task-");
         scheduler.setAwaitTerminationSeconds(60);
-        scheduler.setWaitForTasksToCompleteOnShutdown(true);
+        scheduler.setWaitForTasksToCompleteOnShutdown(false);
         scheduler.setErrorHandler(t -> schedulingLogger.error(
                 "Unknown error occurred while executing task.", t
         ));
