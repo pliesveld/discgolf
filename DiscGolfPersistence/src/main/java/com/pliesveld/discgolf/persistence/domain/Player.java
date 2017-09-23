@@ -42,9 +42,14 @@ public class Player {
     public ScoreCard scoreCard() {
         Assert.notNull(currentGame, "Player has no current game.");
         Assert.notEmpty(currentGame.getPlayers(), "Current game has no players");
-        Assert.notEmpty(currentGame.getScores(), "Current game has no scorecards");
+        Assert.notNull(currentGame.getScores(), "Current game has no scorecards");
         Assert.isTrue(currentGame.getScores().containsKey(name), "Player is not a member of the current game");
         return currentGame.getScores().get(name);
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" + "id='" + id + '\'' + ", name='" + name + '\'' + '}';
     }
 }
 

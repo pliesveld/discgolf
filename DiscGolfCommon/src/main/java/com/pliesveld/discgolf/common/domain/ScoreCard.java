@@ -35,14 +35,14 @@ public class ScoreCard {
 
     public void record(int strokes) {
         final int currentHole = this.currentHole;
-        final List<Score> scoreList = getStrokesList();
 
-        if ( (currentHole < 0 || currentHole > 17 )
-                || (scoreList.size() <= currentHole) ) {
+
+        if ( currentHole < 0 || currentHole > 17) {
             throw new GameException("Could not record game; currentHole is invalid.");
         }
 
-        scoreList.get(currentHole).setStrokes(strokes);
+        Score score = new Score(3, strokes);
+        strokesList.add(score);
         setCurrentHole(currentHole + 1);
     }
 
@@ -50,5 +50,8 @@ public class ScoreCard {
         return strokesList.stream().filter(score -> score.getStrokes() != -1).mapToInt(Score::getScore).sum();
     }
 
-
+    @Override
+    public String toString() {
+        return "ScoreCard{" + "strokesList=" + strokesList + ", currentHole=" + currentHole + ", tee=" + tee + ", basket=" + basket + '}';
+    }
 }

@@ -14,20 +14,25 @@ import com.pliesveld.discgolf.persistence.domain.Player;
 import com.pliesveld.discgolf.persistence.repository.mongo.CourseRepository;
 import com.pliesveld.discgolf.persistence.repository.mongo.GameRepository;
 import com.pliesveld.discgolf.persistence.repository.mongo.PlayerRepository;
+import com.pliesveld.discgolf.service.GameService;
 import com.pliesveld.discgolf.service.events.GameEvent;
 import com.pliesveld.discgolf.service.events.GameUpdateEvent;
 import com.pliesveld.discgolf.web.domain.NewGame;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import static com.pliesveld.discgolf.common.domain.GameStatus.PLAYING;
 
 @RestController
 @RequestMapping("/game")
 public class GameController {
+    final static private Logger LOG = LogManager.getLogger();
 
     @Autowired
     private GameRepository gameRepository;
@@ -39,7 +44,42 @@ public class GameController {
     private PlayerRepository playerRepository;
 
     @Autowired
+    private GameService gameService;
+
+    @Autowired
     private ApplicationEventPublisher publisher;
+
+    static public class GameDTO {
+        private GameStatus gameStatus;
+
+        private String courseName;
+
+        private Map<String, ScoreCard> scores;
+
+        public GameStatus getGameStatus() {
+            return gameStatus;
+        }
+
+        public void setGameStatus(GameStatus gameStatus) {
+            this.gameStatus = gameStatus;
+        }
+
+        public String getCourseName() {
+            return courseName;
+        }
+
+        public void setCourseName(String courseName) {
+            this.courseName = courseName;
+        }
+
+        public Map<String,ScoreCard> getScores() {
+            return scores;
+        }
+
+        public void setScores(Map<String,ScoreCard> scores) {
+            this.scores = scores;
+        }
+    }
 
     @GetMapping(path = "/id/{id}")
     public ResponseEntity<?> handlePlayerById(@PathVariable("id") String gameId) {
@@ -47,7 +87,12 @@ public class GameController {
         if (game == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(game);
+
+        GameDTO gameDTO = new GameDTO();
+        gameDTO.setCourseName(game.getCourse().getName());
+        gameDTO.setGameStatus(game.getGameStatus());
+        gameDTO.setScores(game.getScores());
+        return ResponseEntity.ok(gameDTO);
     }
 
     @PostMapping
@@ -75,10 +120,6 @@ public class GameController {
         }
 
         final Game game = gameRepository.save(new Game(course, players));
-
-//        players.stream().forEach(p -> p.setCurrentGame(game));
-
-//        players.stream().forEach(p -> playerRepository.save(p));
 
         if (game == null) throw new GameException("Failed to create new game.");
 
@@ -118,6 +159,12 @@ public class GameController {
             throw new GameException("Invalid game.");
         }
 
+        Player player = playerRepository.findByName(playerName);
+
+        if (player == null) {
+            throw new GameException("Player not found.");
+        }
+
         final GameStatus gameStatus = game.getGameStatus();
         switch (gameStatus) {
             case NEW:
@@ -130,11 +177,13 @@ public class GameController {
                 throw new GameException("Invalid game state: " + gameStatus);
         }
 
-        final Player player = playerRepository.findByName(playerName);
-
-        if (player == null) {
-            throw new GameException("Player not found.");
+        if (player.getCurrentGame() == null || !player.getCurrentGame().getId().equals(gameId)) {
+            player = gameService.startGame(game, player);
         }
+
+//        player.setCurrentGame(game);
+//        player = playerRepository.save(player);
+//        LOG.info("Setting current game for {} to {}", player.getName(), gameId);
 
         final ScoreCard scoreCard = player.scoreCard();
 

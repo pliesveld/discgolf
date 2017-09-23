@@ -13,4 +13,9 @@ public class GameUpdateEvent extends GameEvent {
     public ScoreCard getScoreCard() {
         return scoreCard;
     }
+
+    @Override
+    public String toString() {
+        return "GameUpdateEvent{" + "scoreCard=" + scoreCard + '}';
+    }
 }

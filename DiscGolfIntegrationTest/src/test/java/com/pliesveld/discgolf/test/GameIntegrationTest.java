@@ -83,7 +83,8 @@ public class GameIntegrationTest extends AbstractDiscGolfIntegrationTest {
     public void whenGame_shouldCreate() {
 
         Player patrick =
-        when()
+        given(defaultRequest())
+        .when()
             .get("/player/name/patrick").andReturn().as(Player.class);
 
         assertNotNull(patrick);
@@ -101,7 +102,7 @@ public class GameIntegrationTest extends AbstractDiscGolfIntegrationTest {
         newGame.setPlayers(singletonList(patrick.getId()));
 
         Response response =
-        given()
+        given(defaultRequest())
             .contentType(ContentType.JSON)
             .accept(ContentType.JSON)
         .when()
@@ -110,7 +111,6 @@ public class GameIntegrationTest extends AbstractDiscGolfIntegrationTest {
             .andReturn();
 
         response.then().assertThat().statusCode(200);
-        response.then().log().all();
         response.then().assertThat().body("gameStatus", equalTo("NEW"));
         response.then().assertThat().body("players.size()", is(1));
 
@@ -120,12 +120,11 @@ public class GameIntegrationTest extends AbstractDiscGolfIntegrationTest {
         final String gameId = response.thenReturn().body().jsonPath().getString("id");
         assertNotNull(gameId);
 
-        given()
+        given(defaultRequest())
             .pathParam("gameId", gameId)
         .when()
             .get("/game/id/{gameId}")
         .then()
-            .log().ifValidationFails()
             .statusCode(200);
 
         final String playerName = patrick.getName();
@@ -134,35 +133,38 @@ public class GameIntegrationTest extends AbstractDiscGolfIntegrationTest {
             recordScore(gameId, playerName, 3);
         }
 
-        given()
-            .accept(ContentType.JSON)
-            .contentType(ContentType.JSON)
+        response =
+        given(defaultRequest())
             .pathParam("gameId", gameId)
         .when()
             .get("/game/id/{gameId}")
-        .then()
-            .log().ifValidationFails()
-            .statusCode(200)
+            .andReturn();
+
+        response
+            .then().assertThat().statusCode(200);
+
+        LOG.debug(response.getBody().print());
+
+        response
+            .then().assertThat()
             .body("scores.patrick.strokesList.size()", is(18));
 
-        given().pathParam("gameId", gameId).pathParam("playerName", playerName).param("strokes", 3).when().post("/game/{gameId}/player/{playerName}/score").then().log().ifValidationFails().assertThat().statusCode(not(200));
+//        given(defaultRequest()).pathParam("gameId", gameId).pathParam("playerName", playerName).param("strokes", 3).when().post("/game/{gameId}/player/{playerName}/strokes").then().log().ifValidationFails().assertThat().statusCode(not(200));
 
     }
 
     private void recordScore(String gameId, String playerName, int strokes) {
+
         GameController.ScoreDTO scoreDTO = new GameController.ScoreDTO();
         scoreDTO.setStrokes(strokes);
 
-        given()
-            .accept(ContentType.JSON)
-            .contentType(ContentType.JSON)
+        given(defaultRequest())
             .pathParam("gameId", gameId)
             .pathParam("playerName", playerName)
             .body(scoreDTO)
         .when()
             .post("/game/{gameId}/player/{playerName}/score")
         .then()
-            .log().ifValidationFails()
             .assertThat().statusCode(200);
     }
 
