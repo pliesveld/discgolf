@@ -1,8 +1,12 @@
 package com.pliesveld.discgolf.test;
 
+import com.pliesveld.discgolf.common.domain.Color;
+import com.pliesveld.discgolf.common.domain.GameMode;
 import com.pliesveld.discgolf.persistence.domain.Course;
 import com.pliesveld.discgolf.persistence.domain.Player;
 import com.pliesveld.discgolf.test.core.AbstractDiscGolfIntegrationTest;
+import com.pliesveld.discgolf.web.controller.GameController;
+import com.pliesveld.discgolf.web.domain.NewGame;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.apache.logging.log4j.LogManager;
@@ -76,7 +80,6 @@ public class GameIntegrationTest extends AbstractDiscGolfIntegrationTest {
     }
 
     @Test
-    @Ignore("game failing to create")
     public void whenGame_shouldCreate() {
 
         Player patrick =
@@ -90,13 +93,19 @@ public class GameIntegrationTest extends AbstractDiscGolfIntegrationTest {
             .get("/course/name/Bull Run Regional Park")
         .andReturn().as(Course.class);
 
+        NewGame newGame = new NewGame();
+        newGame.setCourse(course.getName());
+        newGame.setDefaultBasket(Color.WHITE);
+        newGame.setDefaultTee(Color.WHITE);
+        newGame.setMode(GameMode.STROKE_PLAY);
+        newGame.setPlayers(singletonList(patrick.getId()));
+
         Response response =
         given()
             .contentType(ContentType.JSON)
             .accept(ContentType.JSON)
-            .param("players", singletonList(patrick.getId()))
-            .param("course", course.getName())
         .when()
+            .body(newGame)
             .post("/game")
             .andReturn();
 
@@ -126,6 +135,8 @@ public class GameIntegrationTest extends AbstractDiscGolfIntegrationTest {
         }
 
         given()
+            .accept(ContentType.JSON)
+            .contentType(ContentType.JSON)
             .pathParam("gameId", gameId)
         .when()
             .get("/game/id/{gameId}")
@@ -134,12 +145,25 @@ public class GameIntegrationTest extends AbstractDiscGolfIntegrationTest {
             .statusCode(200)
             .body("scores.patrick.strokesList.size()", is(18));
 
-        given().pathParam("gameId", gameId).pathParam("playerName", playerName).param("strokes", 3).when().post("/game/{gameId}/player/{playerName}/strokes").then().log().ifValidationFails().assertThat().statusCode(not(200));
+        given().pathParam("gameId", gameId).pathParam("playerName", playerName).param("strokes", 3).when().post("/game/{gameId}/player/{playerName}/score").then().log().ifValidationFails().assertThat().statusCode(not(200));
 
     }
 
     private void recordScore(String gameId, String playerName, int strokes) {
-        given().pathParam("gameId", gameId).pathParam("playerName", playerName).param("strokes", 3).when().post("/game/{gameId}/player/{playerName}/strokes").then().log().ifValidationFails().assertThat().statusCode(200);
+        GameController.ScoreDTO scoreDTO = new GameController.ScoreDTO();
+        scoreDTO.setStrokes(strokes);
+
+        given()
+            .accept(ContentType.JSON)
+            .contentType(ContentType.JSON)
+            .pathParam("gameId", gameId)
+            .pathParam("playerName", playerName)
+            .body(scoreDTO)
+        .when()
+            .post("/game/{gameId}/player/{playerName}/score")
+        .then()
+            .log().ifValidationFails()
+            .assertThat().statusCode(200);
     }
 
 }

@@ -76,6 +76,10 @@ public class GameController {
 
         final Game game = gameRepository.save(new Game(course, players));
 
+//        players.stream().forEach(p -> p.setCurrentGame(game));
+
+//        players.stream().forEach(p -> playerRepository.save(p));
+
         if (game == null) throw new GameException("Failed to create new game.");
 
         publisher.publishEvent(new GameEvent(game));
